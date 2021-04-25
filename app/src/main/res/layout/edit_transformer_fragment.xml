@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.transformers.EditTransformerFragment">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_view_margin"
+            android:layout_marginEnd="@dimen/card_view_margin"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/nameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/transformer_name_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/colorPrimary"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_14sp" />
+
+                <EditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="match_parent"
+                    style="@style/EditTextStyle"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+                    android:inputType="text"
+                    android:hint="@string/transformer_name"/>
+
+                <TextView
+                    android:id="@+id/teamTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/transformer_team_title"
+                    android:layout_marginTop="@dimen/margin_top"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+                    android:textColor="@color/colorPrimary"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_14sp" />
+
+                <RadioGroup
+                    android:checkedButton="@+id/autobotsRadioButton"
+                    android:id="@+id/teamRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/radio_group_height"
+                    android:layout_marginTop="@dimen/transformer_stats_layout_margin"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/teamTextView"
+                    android:background="@drawable/switch_light_grey"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_marginLeft="2dp"
+                        android:id="@+id/autobotsRadioButton"
+                        style="@style/RadioButtonStyle"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorRed"
+                        android:textStyle="bold"
+                        android:background="@drawable/background_toggle_white"
+                        android:text="@string/transformer_team_autobots" />
+
+                    <RadioButton
+                        android:layout_marginRight="2dp"
+                        android:id="@+id/decepticonsRadioButton"
+                        style="@style/RadioButtonStyle"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textStyle="bold"
+                        android:background="@drawable/background_toggle_white"
+                        android:text="@string/transformer_team_decepticons" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_bottom"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/teamRadioGroup">
+
+                    <include
+                        android:id="@+id/strengthLayout"
+                        layout="@layout/transformer_stats_layout" />
+
+                    <include
+                        android:id="@+id/intelligenceLayout"
+                        layout="@layout/transformer_stats_layout" />
+
+                    <include
+                        android:id="@+id/speedLayout"
+                        layout="@layout/transformer_stats_layout" />
+
+                    <include
+                        android:id="@+id/enduranceLayout"
+                        layout="@layout/transformer_stats_layout" />
+
+                    <include
+                        android:id="@+id/rankLayout"
+                        layout="@layout/transformer_stats_layout" />
+
+                    <include
+                        android:id="@+id/courageLayout"
+                        layout="@layout/transformer_stats_layout" />
+
+                    <include
+                        android:id="@+id/firepowerLayout"
+                        layout="@layout/transformer_stats_layout" />
+
+                    <include
+                        android:id="@+id/skillLayout"
+                        layout="@layout/transformer_stats_layout" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/updateButton"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/button_margin"
+            android:layout_marginTop="@dimen/button_margin"
+            android:layout_marginEnd="@dimen/button_margin"
+            android:enabled="false"
+            android:text="@string/transformer_update_button" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/button_margin"
+            android:backgroundTint="@color/colorRed"
+            android:text="@string/transformer_delete_button" />
+
+    </LinearLayout>
+
+</ScrollView>

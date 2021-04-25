@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Aequilibrium Transformers</string>
+
+    // Screen Titles
+    <string name="transformers_title">Transformers</string>
+    <string name="edit_transformer_title">Edit Transformer</string>
+    <string name="new_transformer_title">New Transformer</string>
+    <string name="update_transformer_title">Update Transformer Title</string>
+    <string name="delete_transformer_title">Delete Transformer Title</string>
+
+    // Error Dialog
+    <string name="error_dialog_title">error_dialog_title</string>
+    <string name="error_dialog_message">error_dialog_message</string>
+    <string name="default_ok_text">default_ok_text</string>
+
+    <string name="no_internet_title">no_internet_title</string>
+    <string name="no_internet_message">no_internet_message</string>
+
+    // New Transformer
+    <string name="transformer_name_title">Transformer Name</string>
+    <string name="transformer_name">Enter Transformer Name</string>
+    <string name="transformer_team_title">Transformer Team</string>
+    <string name="transformer_team_autobots">Autobots</string>
+    <string name="transformer_team_decepticons">Decepticons</string>
+    <string name="transformer_create_button">Create New Transformer</string>
+
+
+    // Edit Transformer
+    <string name="transformer_default_value">5</string>
+    <string name="transformer_stats">Stats</string>
+    <string name="transformer_stats_values">%1$s = %2$s</string>
+    <string name="transformer_strength">Strength</string>
+    <string name="transformer_intelligence">Intelligence</string>
+    <string name="transformer_speed">Speed</string>
+    <string name="transformer_endurance">Endurance</string>
+    <string name="transformer_rank">Rank</string>
+    <string name="transformer_courage">Courage</string>
+    <string name="transformer_firepower">Firepower</string>
+    <string name="transformer_skill">Skill</string>
+    <string name="transformer_update_button">Save Change</string>
+    <string name="transformer_delete_button">Delete</string>
+</resources>

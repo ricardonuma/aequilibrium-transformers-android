@@ -1,0 +1,21 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="text_size_14sp">14sp</dimen>
+    <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="text_size_36sp">36sp</dimen>
+
+    // New Transformer
+    <dimen name="edit_text_view_height">56dp</dimen>
+    <dimen name="radio_group_width">230dp</dimen>
+    <dimen name="radio_group_height">38dp</dimen>
+    <dimen name="margin_top">16dp</dimen>
+    <dimen name="margin_bottom">32dp</dimen>
+
+    // Edit Transformer
+    <dimen name="card_view_margin">24dp</dimen>
+    <dimen name="transformer_stats_layout_margin">16dp</dimen>
+
+    <dimen name="button_height">44dp</dimen>
+    <dimen name="button_text_size">16sp</dimen>
+    <dimen name="button_margin">24dp</dimen>
+</resources>

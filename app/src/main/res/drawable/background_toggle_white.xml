@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item>-->
+<!--        <ripple android:color="@color/colorWhite" tools:ignore="StateListReachable">-->
+<!--            <item android:state_checked="true">-->
+<!--                <shape android:shape="rectangle">-->
+<!--                    <corners android:radius="4dp" />-->
+<!--                    <solid android:color="@color/colorWhite" />-->
+<!--                </shape>-->
+<!--            </item>-->
+<!--        </ripple>-->
+<!--    </item>-->
+<!--    <item>-->
+<!--        <ripple android:color="@color/colorWhite">-->
+<!--            <item android:state_pressed="true">-->
+<!--                <shape android:shape="rectangle">-->
+<!--                    <corners android:radius="4dp" />-->
+<!--                    <solid android:color="@color/colorWhite" />-->
+<!--                </shape>-->
+<!--            </item>-->
+<!--        </ripple>-->
+<!--    </item>-->
+</selector>
