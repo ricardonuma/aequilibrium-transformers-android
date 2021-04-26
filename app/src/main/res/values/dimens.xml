@@ -8,7 +8,9 @@
     // Transformers
     <dimen name="card_view_margin_start_end">8dp</dimen>
     <dimen name="card_view_margin_top_bottom">4dp</dimen>
-    <dimen name="row_item_stats_margin_start">20dp</dimen>
+    <dimen name="row_item_name_margin">16dp</dimen>
+    <dimen name="row_item_icon_margin">16dp</dimen>
+    <dimen name="row_item_stats_margin_start">12dp</dimen>
     <dimen name="row_item_stats_margin_top">8dp</dimen>
 
     // New Transformer
@@ -17,14 +19,16 @@
     <dimen name="radio_group_width">230dp</dimen>
     <dimen name="radio_group_height">44dp</dimen>
     <dimen name="transformer_title_margin">12dp</dimen>
-    <dimen name="transformer_stats_layout_margin_top">32dp</dimen>
+    <dimen name="transformer_radio_group_margin_bottom">32dp</dimen>
     <dimen name="transformer_stats_layout_margin_bottom">16dp</dimen>
 
     // Edit Transformer
-    <dimen name="layout_margin_start_end">24dp</dimen>
     <dimen name="transformer_stats_layout_margin">16dp</dimen>
 
+    <dimen name="layout_margin">24dp</dimen>
+    <dimen name="layout_padding">24dp</dimen>
+    <dimen name="edit_text_padding">16dp</dimen>
     <dimen name="button_height">44dp</dimen>
     <dimen name="button_text_size">16sp</dimen>
-    <dimen name="button_margin">24dp</dimen>
+    <dimen name="button_margin">16dp</dimen>
 </resources>

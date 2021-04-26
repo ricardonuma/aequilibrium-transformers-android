@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -13,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.aequilibrium.transformers.R
 import com.aequilibrium.transformers.databinding.MainActivityBinding
 import com.aequilibrium.transformers.ui.common.SharedViewModel
+import com.aequilibrium.transformers.ui.transformers.TransformersFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,16 +36,17 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.transformersFragment))
 
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            updateToolbar()
-        }
 
         viewModel.loading.observe(this) {
-            binding.loading.visibility = if (it) View.VISIBLE else View.GONE
+            binding.loading.visibility = if (it) {
+                if (navHostFragment.childFragmentManager.fragments[0] !is TransformersFragment) {
+                    navHostFragment.view?.visibility = View.GONE
+                }
+                View.VISIBLE
+            } else {
+                navHostFragment.view?.visibility = View.VISIBLE
+                View.GONE
+            }
         }
-    }
-
-    private fun updateToolbar() {
-        binding.toolbar.visibility = View.VISIBLE
     }
 }

@@ -11,6 +11,7 @@ import com.aequilibrium.transformers.data.model.Resource
 import com.aequilibrium.transformers.data.model.Transformer
 import com.aequilibrium.transformers.databinding.TransformersFragmentBinding
 import com.aequilibrium.transformers.ui.common.BaseFragment
+import com.aequilibrium.transformers.utils.Constants.offlineExceptionError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 
@@ -35,7 +36,7 @@ class TransformersFragment : BaseFragment() {
 
         val accessToken = runBlocking { sessionManager.getToken() }
         if (accessToken.isNullOrEmpty()) {
-            getToken()
+            getToken { getTransformers() }
         } else {
             getTransformers()
         }
@@ -46,35 +47,22 @@ class TransformersFragment : BaseFragment() {
 
         binding.addFab.setOnClickListener {
             findNavController().navigate(
-            TransformersFragmentDirections.actionTransformersFragmentToNewTransformerFragment()
-        )}
-    }
-
-    private fun getToken() {
-        sharedViewModel.getToken().observe(viewLifecycleOwner) { it ->
-            when (it) {
-                is Resource.Loading -> showLoading() // show loading
-                is Resource.Error -> {
-                    hideLoading()
-//                    showErrorDialog()
-                }
-                is Resource.Success -> {
-                    it.data?.let { data ->
-                        sessionManager.storeToken(data)
-                        getTransformers()
-                    }
-                }
-            }
+                TransformersFragmentDirections.actionTransformersFragmentToNewTransformerFragment()
+            )
         }
     }
 
     private fun getTransformers() {
         transformersViewModel.getTransformers().observe(viewLifecycleOwner) { it ->
             when (it) {
-                is Resource.Loading -> showLoading() // show loading
+                is Resource.Loading -> showLoading()
                 is Resource.Error -> {
                     hideLoading()
-//                    showErrorDialog()
+                    if (it.message != null && it.message.contains(offlineExceptionError)) {
+                        showNoInternetDialog()
+                    } else {
+                        showErrorDialog()
+                    }
                 }
                 is Resource.Success -> {
                     hideLoading()

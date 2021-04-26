@@ -18,8 +18,10 @@ import com.aequilibrium.transformers.data.model.TransformerRequest
 import com.aequilibrium.transformers.databinding.NewTransformerFragmentBinding
 import com.aequilibrium.transformers.databinding.TransformerStatsLayoutBinding
 import com.aequilibrium.transformers.ui.common.BaseFragment
+import com.aequilibrium.transformers.utils.Constants
 import com.google.android.material.slider.Slider
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -52,7 +54,14 @@ class NewTransformerFragment : BaseFragment() {
 
         setupStats()
 
-        binding.createButton.setOnClickListener { createTransformer() }
+        binding.createButton.setOnClickListener {
+            val accessToken = runBlocking { sessionManager.getToken() }
+            if (accessToken.isNullOrEmpty()) {
+                getToken { createTransformer() }
+            } else {
+                createTransformer()
+            }
+        }
     }
 
     private fun setupName() {
@@ -70,6 +79,7 @@ class NewTransformerFragment : BaseFragment() {
         clickedRadioButton: RadioButton,
         otherRadioButton: RadioButton
     ) {
+        clickedRadioButton.isChecked = true
         clickedRadioButton.background =
             ContextCompat.getDrawable(requireContext(), R.drawable.background_toggle_white)
         clickedRadioButton.setTextColor(
@@ -122,7 +132,6 @@ class NewTransformerFragment : BaseFragment() {
     }
 
     private fun onValueChange(slider: Slider, valueTextView: TextView, statsResource: Int) {
-        // valueTextView is my custom label
         valueTextView.apply {
             text = getString(
                 R.string.transformer_stats_values,
@@ -164,7 +173,7 @@ class NewTransformerFragment : BaseFragment() {
         val newTransformer = TransformerRequest(
             "",
             binding.nameEditText.text.toString(),
-            if (binding.teamRadioGroup.checkedRadioButtonId == binding.decepticonsRadioButton.id) "D" else "A",
+            if (binding.autobotsRadioButton.isChecked) "A" else "D",
             binding.strengthLayout.slider.value.toInt(),
             binding.intelligenceLayout.slider.value.toInt(),
             binding.speedLayout.slider.value.toInt(),
@@ -174,18 +183,21 @@ class NewTransformerFragment : BaseFragment() {
             binding.firepowerLayout.slider.value.toInt(),
             binding.skillLayout.slider.value.toInt()
         )
-        transformersViewModel.createTransformer(newTransformer)
-            .observe(viewLifecycleOwner) { it ->
-                when (it) {
-                    is Resource.Loading -> showLoading() // show loading
-                    is Resource.Error -> {
-                        hideLoading()
-//                    showErrorDialog()
-                    }
-                    is Resource.Success -> {
-                        findNavController().navigate(NewTransformerFragmentDirections.actionNewTransformersFragmentToTransformersFragment())
+        transformersViewModel.createTransformer(newTransformer).observe(viewLifecycleOwner) { it ->
+            when (it) {
+                is Resource.Loading -> showLoading()
+                is Resource.Error -> {
+                    hideLoading()
+                    if (it.message != null && it.message.contains(Constants.offlineExceptionError)) {
+                        showNoInternetDialog()
+                    } else {
+                        showErrorDialog()
                     }
                 }
+                is Resource.Success -> {
+                    findNavController().navigate(NewTransformerFragmentDirections.actionNewTransformersFragmentToTransformersFragment())
+                }
             }
+        }
     }
 }

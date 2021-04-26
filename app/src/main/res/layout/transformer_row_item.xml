@@ -16,10 +16,10 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="168dp"
         android:layout_marginStart="@dimen/card_view_margin_start_end"
-        android:layout_marginEnd="@dimen/card_view_margin_start_end"
         android:layout_marginTop="@dimen/card_view_margin_top_bottom"
+        android:layout_marginEnd="@dimen/card_view_margin_start_end"
         android:layout_marginBottom="@dimen/card_view_margin_top_bottom"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp">
@@ -32,24 +32,27 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/teamIconImageView"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_margin="@dimen/row_item_stats_margin_top"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="@dimen/row_item_icon_margin"
+                android:layout_marginBottom="@dimen/row_item_icon_margin"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/nameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/row_item_stats_margin_start"
-                android:layout_marginTop="@dimen/row_item_stats_margin_top"
+                android:layout_marginStart="@dimen/row_item_name_margin"
+                android:layout_marginTop="@dimen/row_item_name_margin"
+                android:ellipsize="end"
+                android:maxWidth="264dp"
+                android:maxLines="1"
                 android:text="@{transformerRowItem.name}"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_size_20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/teamIconImageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="name" />
 

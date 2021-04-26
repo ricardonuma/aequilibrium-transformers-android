@@ -1,144 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/main"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/layout_padding"
         android:orientation="vertical"
         tools:context=".ui.transformers.EditTransformerFragment">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/container"
-                android:layout_marginStart="@dimen/layout_margin_start_end"
-                android:layout_marginEnd="@dimen/layout_margin_start_end"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/transformer_name_title"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/nameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/transformer_name_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/text_size_16sp" />
+        <EditText
+            android:id="@+id/nameEditText"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/transformer_title_margin"
+            android:layout_marginTop="@dimen/transformer_title_margin"
+            android:layout_marginEnd="@dimen/transformer_title_margin"
+            android:paddingStart="@dimen/edit_text_padding"
+            android:paddingEnd="@dimen/edit_text_padding"
+            android:elevation="2dp"
+            android:maxLines="1"
+            android:maxLength="25"
+            android:gravity="center"
+            android:hint="@string/transformer_name"
+            android:inputType="text" />
 
-                <EditText
-                    android:id="@+id/nameEditText"
-                    android:layout_width="match_parent"
-                    style="@style/EditTextStyle"
-                    android:elevation="2dp"
-                    android:layout_marginTop="@dimen/transformer_title_margin"
-                    android:layout_marginStart="@dimen/transformer_title_margin"
-                    android:layout_marginEnd="@dimen/transformer_title_margin"
-                    android:gravity="center"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-                    android:inputType="text"
-                    android:hint="@string/transformer_name"/>
+        <TextView
+            android:id="@+id/teamTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/radio_group_title_margin_top"
+            android:text="@string/transformer_team_title"
+            android:textAllCaps="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/teamTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/transformer_team_title"
-                    android:layout_marginTop="@dimen/radio_group_title_margin_top"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/text_size_16sp" />
+        <RadioGroup
+            android:id="@+id/teamRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/radio_group_height"
+            android:layout_marginStart="@dimen/transformer_title_margin"
+            android:layout_marginTop="@dimen/transformer_title_margin"
+            android:layout_marginEnd="@dimen/transformer_title_margin"
+            android:layout_marginBottom="@dimen/transformer_radio_group_margin_bottom"
+            android:background="@drawable/switch_light_grey"
+            android:orientation="horizontal">
 
-                <RadioGroup
-                    android:id="@+id/teamRadioGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/radio_group_height"
-                    android:layout_marginTop="@dimen/transformer_title_margin"
-                    android:layout_marginStart="@dimen/transformer_title_margin"
-                    android:layout_marginEnd="@dimen/transformer_title_margin"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/teamTextView"
-                    android:background="@drawable/switch_light_grey"
-                    android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/autobotsRadioButton"
+                style="@style/RadioButtonStyle"
+                android:layout_marginLeft="2dp"
+                android:background="@drawable/background_toggle_white"
+                android:text="@string/transformer_team_autobots"
+                android:textAllCaps="true"
+                android:textColor="@color/colorRed"
+                android:textStyle="bold" />
 
-                    <RadioButton
-                        android:layout_marginLeft="2dp"
-                        android:id="@+id/autobotsRadioButton"
-                        style="@style/RadioButtonStyle"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorRed"
-                        android:textStyle="bold"
-                        android:background="@drawable/background_toggle_white"
-                        android:text="@string/transformer_team_autobots" />
+            <RadioButton
+                android:id="@+id/decepticonsRadioButton"
+                style="@style/RadioButtonStyle"
+                android:layout_marginRight="2dp"
+                android:background="@drawable/background_toggle_white"
+                android:text="@string/transformer_team_decepticons"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPurple"
+                android:textStyle="bold" />
+        </RadioGroup>
 
-                    <RadioButton
-                        android:layout_marginRight="2dp"
-                        android:id="@+id/decepticonsRadioButton"
-                        style="@style/RadioButtonStyle"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPurple"
-                        android:textStyle="bold"
-                        android:background="@drawable/background_toggle_white"
-                        android:text="@string/transformer_team_decepticons" />
-                </RadioGroup>
+        <include
+            android:id="@+id/strengthLayout"
+            layout="@layout/transformer_stats_layout" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/transformer_stats_layout_margin_top"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/teamRadioGroup">
+        <include
+            android:id="@+id/intelligenceLayout"
+            layout="@layout/transformer_stats_layout" />
 
-                    <include
-                        android:id="@+id/strengthLayout"
-                        layout="@layout/transformer_stats_layout" />
+        <include
+            android:id="@+id/speedLayout"
+            layout="@layout/transformer_stats_layout" />
 
-                    <include
-                        android:id="@+id/intelligenceLayout"
-                        layout="@layout/transformer_stats_layout" />
+        <include
+            android:id="@+id/enduranceLayout"
+            layout="@layout/transformer_stats_layout" />
 
-                    <include
-                        android:id="@+id/speedLayout"
-                        layout="@layout/transformer_stats_layout" />
+        <include
+            android:id="@+id/rankLayout"
+            layout="@layout/transformer_stats_layout" />
 
-                    <include
-                        android:id="@+id/enduranceLayout"
-                        layout="@layout/transformer_stats_layout" />
+        <include
+            android:id="@+id/courageLayout"
+            layout="@layout/transformer_stats_layout" />
 
-                    <include
-                        android:id="@+id/rankLayout"
-                        layout="@layout/transformer_stats_layout" />
+        <include
+            android:id="@+id/firepowerLayout"
+            layout="@layout/transformer_stats_layout" />
 
-                    <include
-                        android:id="@+id/courageLayout"
-                        layout="@layout/transformer_stats_layout" />
-
-                    <include
-                        android:id="@+id/firepowerLayout"
-                        layout="@layout/transformer_stats_layout" />
-
-                    <include
-                        android:id="@+id/skillLayout"
-                        layout="@layout/transformer_stats_layout" />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/skillLayout"
+            layout="@layout/transformer_stats_layout" />
 
         <Button
             android:id="@+id/updateButton"

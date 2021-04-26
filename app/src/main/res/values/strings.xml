@@ -9,12 +9,12 @@
     <string name="delete_transformer_title">Delete Transformer Title</string>
 
     // Error Dialog
-    <string name="error_dialog_title">error_dialog_title</string>
-    <string name="error_dialog_message">error_dialog_message</string>
-    <string name="default_ok_text">default_ok_text</string>
+    <string name="error_dialog_title">Oops, something went wrong</string>
+    <string name="error_dialog_message">Please try again later.</string>
+    <string name="default_ok_text">Ok</string>
 
-    <string name="no_internet_title">no_internet_title</string>
-    <string name="no_internet_message">no_internet_message</string>
+    <string name="no_internet_title">No Internet</string>
+    <string name="no_internet_message">There seems to be an issue with the network connection. Please make sure that Wi-Fi or mobile data is turned on and try again.</string>
 
     // New Transformer
     <string name="transformer_name_title">Name</string>
@@ -22,7 +22,7 @@
     <string name="transformer_team_title">Team</string>
     <string name="transformer_team_autobots">Autobots</string>
     <string name="transformer_team_decepticons">Decepticons</string>
-    <string name="transformer_create_button">Create New Transformer</string>
+    <string name="transformer_create_button">Create</string>
 
 
     // Edit Transformer
@@ -39,4 +39,7 @@
     <string name="transformer_skill">Skill</string>
     <string name="transformer_update_button">Save Change</string>
     <string name="transformer_delete_button">Delete</string>
+    <string name="transformer_delete_confirm_dialog_title">Are you sure you want to delete this Transformer?</string>
+    <string name="confirm_dialog_button_no">NO</string>
+    <string name="confirm_dialog_button_yes">YES</string>
 </resources>
