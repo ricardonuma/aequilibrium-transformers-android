@@ -12,16 +12,10 @@
         android:orientation="vertical"
         tools:context=".ui.transformers.EditTransformerFragment">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/card_view_margin"
-            android:layout_marginEnd="@dimen/card_view_margin"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="0dp">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/container"
+                android:layout_marginStart="@dimen/layout_margin_start_end"
+                android:layout_marginEnd="@dimen/layout_margin_start_end"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -35,14 +29,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/colorPrimary"
-                    android:textAllCaps="true"
                     android:textStyle="bold"
-                    android:textSize="@dimen/text_size_14sp" />
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_16sp" />
 
                 <EditText
                     android:id="@+id/nameEditText"
                     android:layout_width="match_parent"
                     style="@style/EditTextStyle"
+                    android:elevation="2dp"
+                    android:layout_marginTop="@dimen/transformer_title_margin"
+                    android:layout_marginStart="@dimen/transformer_title_margin"
+                    android:layout_marginEnd="@dimen/transformer_title_margin"
                     android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -56,21 +54,22 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/transformer_team_title"
-                    android:layout_marginTop="@dimen/margin_top"
+                    android:layout_marginTop="@dimen/radio_group_title_margin_top"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nameEditText"
                     android:textColor="@color/colorPrimary"
-                    android:textAllCaps="true"
                     android:textStyle="bold"
-                    android:textSize="@dimen/text_size_14sp" />
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_16sp" />
 
                 <RadioGroup
-                    android:checkedButton="@+id/autobotsRadioButton"
                     android:id="@+id/teamRadioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/radio_group_height"
-                    android:layout_marginTop="@dimen/transformer_stats_layout_margin"
+                    android:layout_marginTop="@dimen/transformer_title_margin"
+                    android:layout_marginStart="@dimen/transformer_title_margin"
+                    android:layout_marginEnd="@dimen/transformer_title_margin"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/teamTextView"
@@ -92,7 +91,7 @@
                         android:id="@+id/decepticonsRadioButton"
                         style="@style/RadioButtonStyle"
                         android:textAllCaps="true"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPurple"
                         android:textStyle="bold"
                         android:background="@drawable/background_toggle_white"
                         android:text="@string/transformer_team_decepticons" />
@@ -101,7 +100,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_bottom"
+                    android:layout_marginTop="@dimen/transformer_stats_layout_margin_top"
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@+id/teamRadioGroup">
 
@@ -141,8 +140,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-
         <Button
             android:id="@+id/updateButton"
             style="@style/ButtonStyle"
@@ -150,6 +147,7 @@
             android:layout_marginStart="@dimen/button_margin"
             android:layout_marginTop="@dimen/button_margin"
             android:layout_marginEnd="@dimen/button_margin"
+            android:backgroundTint="@color/colorPrimary"
             android:enabled="false"
             android:text="@string/transformer_update_button" />
 

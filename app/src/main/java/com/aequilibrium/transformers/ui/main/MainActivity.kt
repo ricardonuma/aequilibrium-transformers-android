@@ -1,13 +1,12 @@
 package com.aequilibrium.transformers.ui.main
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -47,7 +46,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateToolbar() {
-        binding.toolbar.setBackgroundColor(Color.WHITE)
         binding.toolbar.visibility = View.VISIBLE
     }
 }

@@ -17,9 +17,9 @@
     <string name="no_internet_message">no_internet_message</string>
 
     // New Transformer
-    <string name="transformer_name_title">Transformer Name</string>
-    <string name="transformer_name">Enter Transformer Name</string>
-    <string name="transformer_team_title">Transformer Team</string>
+    <string name="transformer_name_title">Name</string>
+    <string name="transformer_name">Enter Name</string>
+    <string name="transformer_team_title">Team</string>
     <string name="transformer_team_autobots">Autobots</string>
     <string name="transformer_team_decepticons">Decepticons</string>
     <string name="transformer_create_button">Create New Transformer</string>

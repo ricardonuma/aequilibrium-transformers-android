@@ -75,7 +75,11 @@ class NewTransformerFragment : BaseFragment() {
         clickedRadioButton.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
-                R.color.colorBlack
+                if (clickedRadioButton == binding.autobotsRadioButton) {
+                    R.color.colorRed
+                } else {
+                    R.color.colorPurple
+                }
             )
         )
         var radioButtonBgDrawable: Drawable? =

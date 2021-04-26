@@ -47,7 +47,6 @@ class EditTransformerFragment : BaseFragment() {
         setupName()
 
         setupRadioGroupBackground()
-        setupRadioButtonBackground(binding.autobotsRadioButton, binding.decepticonsRadioButton)
         binding.autobotsRadioButton.setOnClickListener {
             setupRadioButtonBackground(binding.autobotsRadioButton, binding.decepticonsRadioButton)
             enableSaveButton(validateChanges())
@@ -78,7 +77,11 @@ class EditTransformerFragment : BaseFragment() {
         clickedRadioButton.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
-                R.color.colorBlack
+                if (clickedRadioButton == binding.autobotsRadioButton) {
+                    R.color.colorRed
+                } else {
+                    R.color.colorPurple
+                }
             )
         )
         var radioButtonBgDrawable: Drawable? =
@@ -95,13 +98,11 @@ class EditTransformerFragment : BaseFragment() {
 
     private fun loadTransformer(transformer: Transformer) {
         binding.nameEditText.setText(transformer.name)
-        binding.teamRadioGroup.check(
-            if (args.transformer.team == "A") {
-                binding.autobotsRadioButton.id
-            } else {
-                binding.decepticonsRadioButton.id
-            }
-        )
+        if (args.transformer.team == "A") {
+            setupRadioButtonBackground(binding.autobotsRadioButton, binding.decepticonsRadioButton)
+        } else {
+            setupRadioButtonBackground(binding.decepticonsRadioButton, binding.autobotsRadioButton)
+        }
 
         setupStats(transformer)
 
@@ -173,12 +174,12 @@ class EditTransformerFragment : BaseFragment() {
 
     private fun validateChanges(): Boolean =
         !binding.nameEditText.text.equals(args.transformer.name) ||
-                    if (binding.teamRadioGroup.checkedRadioButtonId == binding.decepticonsRadioButton.id) {
-                        args.transformer.team != "D"
-                    } else {
-                        args.transformer.team != "A"
-                    }
-            ||
+                if (binding.teamRadioGroup.checkedRadioButtonId == binding.decepticonsRadioButton.id) {
+                    args.transformer.team != "D"
+                } else {
+                    args.transformer.team != "A"
+                }
+                ||
                 binding.strengthLayout.slider.value.toInt() != args.transformer.strength ||
                 binding.intelligenceLayout.slider.value.toInt() != args.transformer.intelligence ||
                 binding.speedLayout.slider.value.toInt() != args.transformer.speed ||
@@ -189,7 +190,7 @@ class EditTransformerFragment : BaseFragment() {
                 binding.skillLayout.slider.value.toInt() != args.transformer.skill
 
     private fun enableSaveButton(enableButton: Boolean) {
-        if(enableButton) {
+        if (enableButton) {
             binding.updateButton.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.background_round_white)
             binding.updateButton.isEnabled = true
@@ -205,16 +206,16 @@ class EditTransformerFragment : BaseFragment() {
     private fun updateTransformer(transformer: Transformer) {
         val transformerUpdated = TransformerRequest(
             transformer.id,
-            transformer.name,
-            transformer.team,
-            transformer.strength,
-            transformer.intelligence,
-            transformer.speed,
-            transformer.endurance,
-            transformer.rank,
-            transformer.courage,
-            transformer.firepower,
-            transformer.skill
+            binding.nameEditText.text.toString(),
+            if (binding.teamRadioGroup.checkedRadioButtonId == binding.decepticonsRadioButton.id) "D" else "A",
+            binding.strengthLayout.slider.value.toInt(),
+            binding.intelligenceLayout.slider.value.toInt(),
+            binding.speedLayout.slider.value.toInt(),
+            binding.enduranceLayout.slider.value.toInt(),
+            binding.rankLayout.slider.value.toInt(),
+            binding.courageLayout.slider.value.toInt(),
+            binding.firepowerLayout.slider.value.toInt(),
+            binding.skillLayout.slider.value.toInt()
         )
         transformersViewModel.updateTransformer(transformerUpdated)
             .observe(viewLifecycleOwner) { it ->

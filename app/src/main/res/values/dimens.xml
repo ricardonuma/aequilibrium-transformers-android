@@ -1,18 +1,27 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="text_size_14sp">14sp</dimen>
-    <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="text_size_12sp">12sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="text_size_20sp">20sp</dimen>
     <dimen name="text_size_36sp">36sp</dimen>
 
+    // Transformers
+    <dimen name="card_view_margin_start_end">8dp</dimen>
+    <dimen name="card_view_margin_top_bottom">4dp</dimen>
+    <dimen name="row_item_stats_margin_start">20dp</dimen>
+    <dimen name="row_item_stats_margin_top">8dp</dimen>
+
     // New Transformer
-    <dimen name="edit_text_view_height">56dp</dimen>
+    <dimen name="edit_text_view_height">52dp</dimen>
+    <dimen name="radio_group_title_margin_top">24dp</dimen>
     <dimen name="radio_group_width">230dp</dimen>
-    <dimen name="radio_group_height">38dp</dimen>
-    <dimen name="margin_top">16dp</dimen>
-    <dimen name="margin_bottom">32dp</dimen>
+    <dimen name="radio_group_height">44dp</dimen>
+    <dimen name="transformer_title_margin">12dp</dimen>
+    <dimen name="transformer_stats_layout_margin_top">32dp</dimen>
+    <dimen name="transformer_stats_layout_margin_bottom">16dp</dimen>
 
     // Edit Transformer
-    <dimen name="card_view_margin">24dp</dimen>
+    <dimen name="layout_margin_start_end">24dp</dimen>
     <dimen name="transformer_stats_layout_margin">16dp</dimen>
 
     <dimen name="button_height">44dp</dimen>

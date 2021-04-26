@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.aequilibrium.transformers.MyApplication
 import com.aequilibrium.transformers.R
 import com.aequilibrium.transformers.data.model.Transformer
 import com.aequilibrium.transformers.databinding.TransformerRowItemBinding
@@ -42,7 +43,7 @@ class TransformersAdapter(
         val transformer = transformerList[position]
 
         if (holder is TransformerViewHolder) {
-            holder.bind(transformer)
+            holder.bind(TransformerRowItem(transformer))
         }
     }
 
@@ -61,11 +62,11 @@ class TransformersAdapter(
         private val binding: TransformerRowItemBinding,
         private val transformerClickListener: OnTransformerClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(transformer: Transformer) {
-            binding.transformer = transformer
+        fun bind(transformerRowItem: TransformerRowItem) {
+            binding.transformerRowItem = transformerRowItem
 
             binding.container.setBackgroundColor(
-                if (transformer.team == "A") {
+                if (transformerRowItem.team == "A") {
                     ContextCompat.getColor(context, R.color.colorRed)
                 } else {
                     ContextCompat.getColor(context, R.color.colorPurple)
@@ -73,10 +74,11 @@ class TransformersAdapter(
             )
 
             Glide.with(context)
-                .load(transformer.team_icon)
+                .load(transformerRowItem.team_icon)
                 .into(binding.teamIconImageView)
+
             binding.container.setOnClickListener {
-                transformerClickListener.onTransformerClick(transformer)
+                transformerClickListener.onTransformerClick(transformerRowItem.transformerObject)
             }
         }
     }
@@ -84,5 +86,100 @@ class TransformersAdapter(
     interface OnTransformerClickListener {
         fun onTransformerClick(transformer: Transformer)
     }
+}
+
+data class TransformerRowItem(val transformer: Transformer) {
+
+    val transformerObject: Transformer
+        get() {
+            return transformer
+        }
+
+    val name: String
+        get() {
+            return transformer.name
+        }
+
+    val team: String
+        get() {
+            return transformer.team
+        }
+
+    val team_icon: String
+        get() {
+            return transformer.team_icon
+        }
+
+    val strength: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_strength),
+                transformer.strength.toString()
+            )
+        }
+
+    val intelligence: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_intelligence),
+                transformer.intelligence.toString()
+            )
+        }
+
+    val speed: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_speed),
+                transformer.speed.toString()
+            )
+        }
+
+    val endurance: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_endurance),
+                transformer.endurance.toString()
+            )
+        }
+
+    val rank: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_rank),
+                transformer.rank.toString()
+            )
+        }
+
+    val courage: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_courage),
+                transformer.courage.toString()
+            )
+        }
+
+    val firepower: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_firepower),
+                transformer.firepower.toString()
+            )
+        }
+
+    val skill: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_skill),
+                transformer.skill.toString()
+            )
+        }
 }
 
