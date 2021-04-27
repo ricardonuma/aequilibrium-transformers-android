@@ -17,13 +17,15 @@
     <string name="no_internet_message">There seems to be an issue with the network connection. Please make sure that Wi-Fi or mobile data is turned on and try again.</string>
 
     // New Transformer
+    <string name="transformer_battle">Battle</string>
+
+    // New Transformer
     <string name="transformer_name_title">Name</string>
     <string name="transformer_name">Enter Name</string>
     <string name="transformer_team_title">Team</string>
     <string name="transformer_team_autobots">Autobots</string>
     <string name="transformer_team_decepticons">Decepticons</string>
     <string name="transformer_create_button">Create</string>
-
 
     // Edit Transformer
     <string name="transformer_default_value">5</string>

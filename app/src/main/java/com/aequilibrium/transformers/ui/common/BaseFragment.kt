@@ -1,6 +1,8 @@
 package com.aequilibrium.transformers.ui.common
 
 import android.content.Context
+import android.view.View
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -22,11 +24,20 @@ abstract class BaseFragment : Fragment() {
     val sharedViewModel: SharedViewModel by activityViewModels()
     private var activity: MainActivity? = null
 
+//    private val actionButton
+//        get() = activity?.getActionButton()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = requireActivity() as? MainActivity
     }
+
+//    fun setupActionButton(@DrawableRes background: Int, @DrawableRes image: Int, onClick: () -> Unit) {
+//        actionButton?.setBackgroundResource(background)
+//        actionButton?.setImageResource(image)
+//        actionButton?.setOnClickListener { onClick.invoke() }
+//        actionButton?.visibility = View.VISIBLE
+//    }
 
     fun showNoInternetDialog(onClick: (() -> Unit) = {}) {
         AlertDialog.Builder(requireContext())

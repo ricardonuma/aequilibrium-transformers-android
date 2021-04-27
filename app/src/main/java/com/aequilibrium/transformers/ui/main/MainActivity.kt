@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: SharedViewModel by viewModels()
 
+//    fun getActionButton() = binding.actionButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
