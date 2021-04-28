@@ -9,7 +9,7 @@
 - The app will display all transformers in the same order the API returns them
 - The battle can't start without at least 1 Autobot and 1 Decepticon have been created
 - Both teams will fight starting from the lower ranks to the higher ones. That way more transformers can engage in battle
-- To facilitate multiple battles, the app will not delete the losers from the main list
+- To facilitate multiple battles, the app will not delete the losers from the API's list
 
 ## Introduction
 
