@@ -1,7 +1,9 @@
 package com.aequilibrium.transformers.data.source
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.aequilibrium.transformers.data.model.Resource
+import com.aequilibrium.transformers.data.model.Transformer
 import com.aequilibrium.transformers.data.model.TransformerRequest
 import com.aequilibrium.transformers.data.source.remote.TransformerRemoteDataSource
 import com.aequilibrium.transformers.di.modules.IoDispatcher
@@ -24,7 +26,7 @@ class TransformerRepository @Inject constructor(
             val response = remoteDataSource.getTransformers()
             val transformersResponse = response.body()
             if (response.isSuccessful && transformersResponse != null) {
-                emit(Resource.Success(transformersResponse))
+                emit(Resource.Success(transformersResponse.transformers))
             } else {
                 emit(Resource.Error(transformersResponse?.message, null))
             }
@@ -35,7 +37,7 @@ class TransformerRepository @Inject constructor(
         }
     }
 
-    override fun getTransformer(transformerId: String) = liveData(ioDispatcher) {
+    override fun getTransformer(transformerId: String): LiveData<Resource<out Transformer?>> = liveData(ioDispatcher) {
 
         emit(Resource.Loading())
         try {

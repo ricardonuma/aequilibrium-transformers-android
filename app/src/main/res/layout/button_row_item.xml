@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/battleRowContainer"
+    android:id="@+id/buttonRowContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -11,7 +11,6 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/battle_button"
         style="@style/ButtonStyle"
-        android:layout_width="match_parent"
         android:layout_height="64dp"
         android:letterSpacing="0.025"
         android:backgroundTint="@color/colorBlueAlpha"

@@ -19,7 +19,7 @@ interface ApiInterface {
     suspend fun getTransformers(): Response<TransformersResponse>
 
     @GET("transformers/{transformerId}")
-    suspend fun getTransformer(@Path("transformerId") transformerId: String): Response<Transformer>
+    suspend fun getTransformer(@Path("transformerId") transformerId: String): Response<Transformer?>
 
     @POST("transformers")
     suspend fun createTransformer(@Body transformerRequest: TransformerRequest): Response<ResponseBody>

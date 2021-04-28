@@ -5,8 +5,7 @@
     <string name="transformers_title">Transformers</string>
     <string name="edit_transformer_title">Edit Transformer</string>
     <string name="new_transformer_title">New Transformer</string>
-    <string name="update_transformer_title">Update Transformer Title</string>
-    <string name="delete_transformer_title">Delete Transformer Title</string>
+    <string name="transformers_battle_title">Transformers Battle</string>
 
     // Error Dialog
     <string name="error_dialog_title">Oops, something went wrong</string>
@@ -31,6 +30,7 @@
     <string name="transformer_default_value">5</string>
     <string name="transformer_stats">Stats</string>
     <string name="transformer_stats_values">%1$s = %2$s</string>
+    <string name="transformer_overall_rating">Overall Rating</string>
     <string name="transformer_strength">Strength</string>
     <string name="transformer_intelligence">Intelligence</string>
     <string name="transformer_speed">Speed</string>
@@ -44,4 +44,19 @@
     <string name="transformer_delete_confirm_dialog_title">Are you sure you want to delete this Transformer?</string>
     <string name="confirm_dialog_button_no">NO</string>
     <string name="confirm_dialog_button_yes">YES</string>
+
+    // Transformers Battle
+    <string name="result_team_vs_team">%1$s %2$s\nVs\n%3$s %4$s</string>
+    <string name="result_team_autobots">(Autobots) </string>
+    <string name="result_team_decepticons">(Decepticons) </string>
+    <string name="result_both_destroyed">Both were destroyed</string>
+    <string name="result_both_teams_destroyed">Both teams were destroyed</string>
+    <string name="result_team_name_reason">%1$s %2$s %3$s</string>
+    <string name="result_team_name_reason_ran_away">%1$s %2$s won as %3$s %4$s</string>
+    <string name="result_won_automatically"> won automatically</string>
+    <string name="result_won_skill"> won by skill</string>
+    <string name="result_won_overall_rating"> won by overall rating</string>
+    <string name="result_won_ran_away"> ran away</string>
+    <string name="result_winning_team_message"><b>Winning team %1$s:</b></string>
+    <string name="result_loosing_team_message"><b>Survivors from the losing team %1$s:</b></string>
 </resources>

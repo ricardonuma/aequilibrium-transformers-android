@@ -28,7 +28,7 @@ import kotlin.math.roundToInt
 class NewTransformerFragment : BaseFragment() {
 
     private lateinit var binding: NewTransformerFragmentBinding
-    private val transformersViewModel: TransformersViewModel by viewModels()
+    private val newTransformerViewModel: NewTransformerViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,8 +80,6 @@ class NewTransformerFragment : BaseFragment() {
         otherRadioButton: RadioButton
     ) {
         clickedRadioButton.isChecked = true
-        clickedRadioButton.background =
-            ContextCompat.getDrawable(requireContext(), R.drawable.background_toggle_white)
         clickedRadioButton.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
@@ -92,10 +90,6 @@ class NewTransformerFragment : BaseFragment() {
                 }
             )
         )
-        var radioButtonBgDrawable: Drawable? =
-            ContextCompat.getDrawable(requireContext(), R.drawable.background_toggle_grey)
-        radioButtonBgDrawable?.alpha = 15
-        otherRadioButton.background = radioButtonBgDrawable
         otherRadioButton.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
@@ -183,7 +177,7 @@ class NewTransformerFragment : BaseFragment() {
             binding.firepowerLayout.slider.value.toInt(),
             binding.skillLayout.slider.value.toInt()
         )
-        transformersViewModel.createTransformer(newTransformer).observe(viewLifecycleOwner) { it ->
+        newTransformerViewModel.createTransformer(newTransformer).observe(viewLifecycleOwner) { it ->
             when (it) {
                 is Resource.Loading -> showLoading()
                 is Resource.Error -> {

@@ -30,7 +30,7 @@ import kotlin.math.roundToInt
 class EditTransformerFragment : BaseFragment() {
 
     private lateinit var binding: EditTransformerFragmentBinding
-    private val transformersViewModel: TransformersViewModel by viewModels()
+    private val editTransformerViewModel: EditTransformerViewModel by viewModels()
     private val args: EditTransformerFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -73,8 +73,6 @@ class EditTransformerFragment : BaseFragment() {
         otherRadioButton: RadioButton
     ) {
         clickedRadioButton.isChecked = true
-        clickedRadioButton.background =
-            ContextCompat.getDrawable(requireContext(), R.drawable.background_toggle_white)
         clickedRadioButton.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
@@ -85,10 +83,6 @@ class EditTransformerFragment : BaseFragment() {
                 }
             )
         )
-        var radioButtonBgDrawable: Drawable? =
-            ContextCompat.getDrawable(requireContext(), R.drawable.background_toggle_grey)
-        radioButtonBgDrawable?.alpha = 15
-        otherRadioButton.background = radioButtonBgDrawable
         otherRadioButton.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
@@ -234,7 +228,7 @@ class EditTransformerFragment : BaseFragment() {
             binding.firepowerLayout.slider.value.toInt(),
             binding.skillLayout.slider.value.toInt()
         )
-        transformersViewModel.updateTransformer(transformerUpdated)
+        editTransformerViewModel.updateTransformer(transformerUpdated)
             .observe(viewLifecycleOwner) { it ->
                 when (it) {
                     is Resource.Loading -> showLoading()
@@ -254,7 +248,7 @@ class EditTransformerFragment : BaseFragment() {
     }
 
     private fun deleteTransformer(transformerId: String) {
-        transformersViewModel.deleteTransformer(transformerId).observe(viewLifecycleOwner) { it ->
+        editTransformerViewModel.deleteTransformer(transformerId).observe(viewLifecycleOwner) { it ->
             when (it) {
                 is Resource.Loading -> showLoading()
                 is Resource.Error -> {

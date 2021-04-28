@@ -16,14 +16,9 @@
         <action
             android:id="@+id/action_transformersFragment_to_editTransformerFragment"
             app:destination="@id/editTransformerFragment" />
-        <!--        <argument-->
-        <!--            android:name="isNoFarm"-->
-        <!--            android:defaultValue="false"-->
-        <!--            app:argType="boolean" />-->
-        <!--        <argument-->
-        <!--            android:name="navigate"-->
-        <!--            android:defaultValue=""-->
-        <!--            app:argType="string" />-->
+        <action
+            android:id="@+id/action_transformersFragment_to_TransformersBattleFragment"
+            app:destination="@id/TransformersBattleFragment" />
     </fragment>
     <fragment
         android:id="@+id/editTransformerFragment"
@@ -44,22 +39,19 @@
         android:name="com.aequilibrium.transformers.ui.transformers.NewTransformerFragment"
         android:label="@string/new_transformer_title"
         tools:layout="@layout/new_transformer_fragment">
-            <action
-                android:id="@+id/action_newTransformersFragment_to_TransformersFragment"
-                app:destination="@id/transformersFragment"
-                app:popUpTo="@id/newTransformerFragment"
-                app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_newTransformersFragment_to_TransformersFragment"
+            app:destination="@id/transformersFragment"
+            app:popUpTo="@id/newTransformerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
-    <!--    <fragment-->
-    <!--        android:id="@+id/updateTransformersScreen"-->
-    <!--        android:name="com.aequilibrium.transformers.ui.transformers.UpdateTransformerFragment"-->
-    <!--        android:label="@string/update_transformer_title"-->
-    <!--        tools:layout="@layout/update_transformer_fragment">-->
-    <!--    </fragment>-->
-    <!--    <fragment-->
-    <!--        android:id="@+id/deleteTransformersScreen"-->
-    <!--        android:name="com.aequilibrium.transformers.ui.transformers.DeleteTransformerFragment"-->
-    <!--        android:label="@string/delete_transformer_title"-->
-    <!--        tools:layout="@layout/delete_transformer_fragment">-->
-    <!--    </fragment>-->
+    <fragment
+        android:id="@+id/TransformersBattleFragment"
+        android:name="com.aequilibrium.transformers.ui.transformers.TransformersBattleFragment"
+        android:label="@string/transformers_battle_title"
+        tools:layout="@layout/transformers_battle_fragment">
+        <argument
+            android:name="transformers"
+            app:argType="com.aequilibrium.transformers.data.model.Transformer[]" />
+    </fragment>
 </navigation>

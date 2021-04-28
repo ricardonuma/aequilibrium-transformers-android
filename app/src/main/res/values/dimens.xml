@@ -11,7 +11,7 @@
     <dimen name="row_item_name_margin">16dp</dimen>
     <dimen name="row_item_icon_margin">16dp</dimen>
     <dimen name="row_item_stats_margin_start">12dp</dimen>
-    <dimen name="row_item_stats_margin_top">8dp</dimen>
+    <dimen name="row_item_stats_margin_top">4dp</dimen>
 
     // New Transformer
     <dimen name="edit_text_view_height">52dp</dimen>

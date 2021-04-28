@@ -15,7 +15,7 @@ class TransformerRemoteDataSource @Inject constructor(private val apiInterface: 
         return apiInterface.getTransformers()
     }
 
-    suspend fun getTransformer(transformerId: String): Response<Transformer> {
+    suspend fun getTransformer(transformerId: String): Response<Transformer?> {
         return apiInterface.getTransformer(transformerId)
     }
 

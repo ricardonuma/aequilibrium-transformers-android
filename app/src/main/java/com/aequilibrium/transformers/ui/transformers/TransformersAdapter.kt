@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aequilibrium.transformers.MyApplication
 import com.aequilibrium.transformers.R
 import com.aequilibrium.transformers.data.model.Transformer
-import com.aequilibrium.transformers.databinding.BattleRowItemBinding
+import com.aequilibrium.transformers.databinding.ButtonRowItemBinding
 import com.aequilibrium.transformers.databinding.TransformerRowItemBinding
 import com.bumptech.glide.Glide
 import java.util.*
@@ -20,7 +20,7 @@ class TransformersAdapter(
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var transformerClickListener: OnTransformerClickListener
-    private lateinit var battleClickListener: OnBattleClickListener
+    private lateinit var battleClickListener: OnButtonClickListener
 
     private val ITEM_TYPE_TRANSFORMER = 0
     private val ITEM_TYPE_BUTTON = 1
@@ -39,8 +39,8 @@ class TransformersAdapter(
             )
         } else {
             val battleRowItemBinding =
-                BattleRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            BattleViewHolder(battleRowItemBinding, battleClickListener)
+                ButtonRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ButtonViewHolder(battleRowItemBinding, battleClickListener)
         }
 
     override fun getItemCount(): Int {
@@ -65,32 +65,32 @@ class TransformersAdapter(
         if (holder is TransformerViewHolder) {
             holder.bind(TransformerRowItem(transformer))
         } else {
-            (holder as BattleViewHolder).bind()
+            (holder as ButtonViewHolder).bind()
         }
     }
 
-    fun addTransformerList(transformerList: List<Transformer>) {
+    fun addTransformerList(transformerList: Array<Transformer>) {
         this.transformerList.clear()
-        this.transformerList.addAll(transformerList)
         this.transformerList.add(Transformer("", "", "", 0, 0, 0, 0, 0, 0, 0, 0, ""))
+        this.transformerList.addAll(transformerList)
         notifyDataSetChanged()
     }
 
-    fun addBattleClickListener(battleClickListener: OnBattleClickListener) {
+    fun addButtonClickListener(battleClickListener: OnButtonClickListener) {
         this.battleClickListener = battleClickListener
     }
 
-    interface OnBattleClickListener {
-        fun onBattleClickListener()
+    interface OnButtonClickListener {
+        fun onButtonClickListener()
     }
 
-    class BattleViewHolder(
-        private val battleRowItemBinding: BattleRowItemBinding,
-        private val onBattleClickListener: OnBattleClickListener
+    class ButtonViewHolder(
+        private val battleRowItemBinding: ButtonRowItemBinding,
+        private val onButtonClickListener: OnButtonClickListener
     ) : RecyclerView.ViewHolder(battleRowItemBinding.root) {
         fun bind() {
             battleRowItemBinding.battleButton.setOnClickListener {
-                onBattleClickListener.onBattleClickListener()
+                onButtonClickListener.onButtonClickListener()
             }
         }
     }
@@ -221,6 +221,16 @@ data class TransformerRowItem(val transformer: Transformer) {
                 R.string.transformer_stats_values,
                 MyApplication.getInstance().getString(R.string.transformer_skill),
                 transformer.skill.toString()
+            )
+        }
+
+    val overallRating: String
+        get() {
+            return MyApplication.getInstance().getString(
+                R.string.transformer_stats_values,
+                MyApplication.getInstance().getString(R.string.transformer_overall_rating),
+                (transformer.strength + transformer.intelligence + transformer.speed + transformer.endurance +
+                        transformer.rank + transformer.courage + transformer.firepower + transformer.skill).toString()
             )
         }
 }

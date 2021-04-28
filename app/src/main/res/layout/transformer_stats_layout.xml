@@ -8,14 +8,8 @@
 
     <TextView
         android:id="@+id/statsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:text="@string/transformer_stats"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_size_16sp" />
+        style="@style/TitleTextViewStyle" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/slider"
