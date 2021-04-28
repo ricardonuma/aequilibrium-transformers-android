@@ -54,6 +54,7 @@ APIs which are used to support the functionalities:
 
 •	allspark:
   (GET) https://transformers-api.firebaseapp.com/allspark - Returns a token that should be cached accordingly. For each subsequent requests to any of the '/transformers’ endpoints, the token must be attached to the request’s header. All data saved/retrieved from those endpoints will be unique to the attached token
+  
 •	Transformers:
   (GET) https://transformers-api.firebaseapp.com/transformers - Gets a list of the Transformers created using the POST API
   (GET) https://transformers-api.firebaseapp.com/transformers/{transformerId} - Gets a Transformer based on a valid ID.
