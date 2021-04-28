@@ -6,7 +6,7 @@ Scope of the technical assessment
 This technical assessment is the first version of Transformers for Aequilibrium. High level functionalities include token retrieval, create/view/edit/delete transformers and simulate a battle between them.
 
 
-Technologies
+## Technologies
 
 
 ## Development tools
@@ -34,33 +34,33 @@ Android phones running Android 4.4+
 
 The following features have been introduced in this technical assessment:
 
-•	Token
+o	Token:
 
-o	Get token for other APIs access
+•	Get token for other APIs access
 
-•	Transformers
+o	Transformers:
 
-o	Create transformer
+•	Create transformer
 
-o	View transformer list
+•	View transformer list
 
-o	Pull to refresh on transformers list
+•	Pull to refresh on transformers list
 
-o	View transformer
+•	View transformer
 
-o	Edit transformer by sending a JSON request
+•	Edit transformer by sending a JSON request
 
-o	Delete transformer by its id
+•	Delete transformer by its id
 
-o	APIs error handling
+•	APIs error handling
 
-o	Connection error handling
+•	Connection error handling
 
-o	Simulate a battle between transformers
+•	Simulate a battle between transformers
 
 
 
-Services
+## Services
 
 Services layers were implemented following MVVM model.
 
