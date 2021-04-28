@@ -17,6 +17,7 @@ import com.aequilibrium.transformers.utils.Constants.SKILL_DIFFERENCE
 import com.aequilibrium.transformers.utils.Constants.STRENGTH_DIFFERENCE
 import com.aequilibrium.transformers.utils.Constants.TEAM_AUTOBOTS
 import com.aequilibrium.transformers.utils.Constants.TEAM_DECEPTICONS
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,6 +41,16 @@ class TransformersBattleFragment : BaseFragment() {
         battle(args.transformers)
     }
 
+    private fun loadImages(autobots: ArrayList<Transformer>, decepticons: ArrayList<Transformer>) {
+        Glide.with(this)
+            .load(autobots[0].team_icon)
+            .into(binding.autobotsImageView)
+
+        Glide.with(this)
+            .load(decepticons[0].team_icon)
+            .into(binding.decepticonsImageView)
+    }
+
     private fun battle(transformers: Array<Transformer>) {
         val autobots: ArrayList<Transformer> = ArrayList()
         val decepticons: ArrayList<Transformer> = ArrayList()
@@ -52,6 +63,8 @@ class TransformersBattleFragment : BaseFragment() {
                 decepticons.add(transformer)
             }
         }
+
+        loadImages(autobots, decepticons)
 
         var autobotsIndex: Int = autobots.size - 1
         var decepticonsIndex: Int = decepticons.size - 1
