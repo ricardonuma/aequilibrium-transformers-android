@@ -1,5 +1,16 @@
 # aequilibrium-transformers-android
 
+## Run project
+1. Clone or download this project to your local machine
+2. Open project on Android Studio
+3. Run project
+
+## Assumptions
+- The app will display all transformers in the same order the API returns them
+- The battle can't start without at least 1 Autobot and 1 Decepticon have been created
+- Both teams will fight starting from the lower ranks to the higher ones. That way more transformers can engage in battle
+- To facilitate multiple battles, the app will not delete the losers from the main list
+
 ## Introduction
 
 Scope of the technical assessment
