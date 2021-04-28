@@ -10,4 +10,7 @@ object Constants {
     const val OPTIMUS_PRIME = "Optimus Prime"
     const val PREDAKING = "Predaking"
     const val DRAW = "Draw"
+    const val COURAGE_DIFFERENCE = 4
+    const val STRENGTH_DIFFERENCE = 3
+    const val SKILL_DIFFERENCE = 3
 }

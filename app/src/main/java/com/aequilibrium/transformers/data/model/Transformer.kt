@@ -31,5 +31,6 @@ data class Transformer(
     @Json(name = "team_icon")
     val team_icon: String
 ) : Parcelable {
-    fun overallRating() = strength + intelligence + speed + endurance + rank + courage + firepower + skill
+    fun overallRating() =
+        strength + intelligence + speed + endurance + rank + courage + firepower + skill
 }

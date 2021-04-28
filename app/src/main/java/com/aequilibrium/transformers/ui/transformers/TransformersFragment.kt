@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.aequilibrium.transformers.R
 import com.aequilibrium.transformers.data.model.Resource
 import com.aequilibrium.transformers.data.model.Transformer
 import com.aequilibrium.transformers.databinding.TransformersFragmentBinding
 import com.aequilibrium.transformers.ui.common.BaseFragment
+import com.aequilibrium.transformers.utils.Constants
 import com.aequilibrium.transformers.utils.Constants.offlineExceptionError
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
@@ -33,11 +34,11 @@ class TransformersFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val accessToken = runBlocking { sessionManager.getToken() }
-        if (accessToken.isNullOrEmpty()) {
+        if (accessToken.isEmpty()) {
             getToken { getTransformers() }
         } else {
             getTransformers()
@@ -84,11 +85,15 @@ class TransformersFragment : BaseFragment() {
                             addButtonClickListener(object :
                                 TransformersAdapter.OnButtonClickListener {
                                 override fun onButtonClickListener() {
-                                    findNavController().navigate(
-                                        TransformersFragmentDirections.actionTransformersFragmentToTransformersBattleFragment(
-                                            transformerList
+                                    if (canBattle(transformerList)) {
+                                        findNavController().navigate(
+                                            TransformersFragmentDirections.actionTransformersFragmentToTransformersBattleFragment(
+                                                transformerList
+                                            )
                                         )
-                                    )
+                                    } else {
+                                        showErrorDialog(R.string.battle_error_title)
+                                    }
                                 }
                             })
                         }
@@ -97,6 +102,20 @@ class TransformersFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    private fun canBattle(transformerList: Array<Transformer>): Boolean {
+        var autobot = false
+        var decepticon = false
+        for (transformer in transformerList) {
+            if (transformer.team == Constants.TEAM_AUTOBOTS) {
+                autobot = true
+            } else {
+                decepticon = true
+            }
+        }
+
+        return autobot && decepticon
     }
 
     private fun setupTransformers(list: Array<Transformer>) {

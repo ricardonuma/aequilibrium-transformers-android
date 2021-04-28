@@ -10,6 +10,7 @@ import com.aequilibrium.transformers.R
 import com.aequilibrium.transformers.data.model.Transformer
 import com.aequilibrium.transformers.databinding.ButtonRowItemBinding
 import com.aequilibrium.transformers.databinding.TransformerRowItemBinding
+import com.aequilibrium.transformers.utils.Constants.TEAM_AUTOBOTS
 import com.bumptech.glide.Glide
 import java.util.*
 
@@ -19,14 +20,15 @@ class TransformersAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private lateinit var buttonClickListener: OnButtonClickListener
     private lateinit var transformerClickListener: OnTransformerClickListener
-    private lateinit var battleClickListener: OnButtonClickListener
-
-    private val ITEM_TYPE_TRANSFORMER = 0
-    private val ITEM_TYPE_BUTTON = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        if (viewType == ITEM_TYPE_TRANSFORMER) {
+        if (viewType == ITEM_TYPE_BUTTON) {
+            val battleRowItemBinding =
+                ButtonRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ButtonViewHolder(battleRowItemBinding, buttonClickListener)
+        } else {
             val transformerRowItemBindingItemBinding = TransformerRowItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -37,10 +39,6 @@ class TransformersAdapter(
                 transformerRowItemBindingItemBinding,
                 transformerClickListener
             )
-        } else {
-            val battleRowItemBinding =
-                ButtonRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            ButtonViewHolder(battleRowItemBinding, battleClickListener)
         }
 
     override fun getItemCount(): Int {
@@ -62,22 +60,24 @@ class TransformersAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val transformer = transformerList[position]
 
-        if (holder is TransformerViewHolder) {
-            holder.bind(TransformerRowItem(transformer))
+        if (holder is ButtonViewHolder) {
+            holder.bind()
         } else {
-            (holder as ButtonViewHolder).bind()
+            (holder as TransformerViewHolder).bind(TransformerRowItem(transformer))
         }
     }
 
     fun addTransformerList(transformerList: Array<Transformer>) {
         this.transformerList.clear()
-        this.transformerList.add(Transformer("", "", "", 0, 0, 0, 0, 0, 0, 0, 0, ""))
+        if (!transformerList.isNullOrEmpty()) {
+            this.transformerList.add(Transformer("", "", "", 0, 0, 0, 0, 0, 0, 0, 0, ""))
+        }
         this.transformerList.addAll(transformerList)
         notifyDataSetChanged()
     }
 
-    fun addButtonClickListener(battleClickListener: OnButtonClickListener) {
-        this.battleClickListener = battleClickListener
+    fun addButtonClickListener(buttonClickListener: OnButtonClickListener) {
+        this.buttonClickListener = buttonClickListener
     }
 
     interface OnButtonClickListener {
@@ -85,11 +85,11 @@ class TransformersAdapter(
     }
 
     class ButtonViewHolder(
-        private val battleRowItemBinding: ButtonRowItemBinding,
+        private val buttonRowItemBinding: ButtonRowItemBinding,
         private val onButtonClickListener: OnButtonClickListener
-    ) : RecyclerView.ViewHolder(battleRowItemBinding.root) {
+    ) : RecyclerView.ViewHolder(buttonRowItemBinding.root) {
         fun bind() {
-            battleRowItemBinding.battleButton.setOnClickListener {
+            buttonRowItemBinding.battleButton.setOnClickListener {
                 onButtonClickListener.onButtonClickListener()
             }
         }
@@ -108,7 +108,7 @@ class TransformersAdapter(
             binding.transformerRowItem = transformerRowItem
 
             binding.container.setBackgroundColor(
-                if (transformerRowItem.team == "A") {
+                if (transformerRowItem.team == TEAM_AUTOBOTS) {
                     ContextCompat.getColor(context, R.color.colorRed)
                 } else {
                     ContextCompat.getColor(context, R.color.colorPurple)
@@ -116,7 +116,7 @@ class TransformersAdapter(
             )
 
             Glide.with(context)
-                .load(transformerRowItem.team_icon)
+                .load(transformerRowItem.teamIcon)
                 .into(binding.teamIconImageView)
 
             binding.container.setOnClickListener {
@@ -127,6 +127,11 @@ class TransformersAdapter(
 
     interface OnTransformerClickListener {
         fun onTransformerClick(transformer: Transformer)
+    }
+
+    companion object {
+        private const val ITEM_TYPE_BUTTON = 0
+        private const val ITEM_TYPE_TRANSFORMER = 1
     }
 }
 
@@ -147,7 +152,7 @@ data class TransformerRowItem(val transformer: Transformer) {
             return transformer.team
         }
 
-    val team_icon: String
+    val teamIcon: String
         get() {
             return transformer.team_icon
         }

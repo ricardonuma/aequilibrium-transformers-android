@@ -2,7 +2,7 @@ package com.aequilibrium.transformers.di.modules
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import com.aequilibrium.transformers.auth.ApplicationHeadersInterceptor
 import com.aequilibrium.transformers.auth.SessionManager
 import com.aequilibrium.transformers.utils.NetworkConnectionInterceptor
@@ -25,16 +25,18 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSharedPreferences(app: Application): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
+    fun provideSharedPreferences(app: Application): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(app)
 
     @Provides
     @Singleton
     fun providesConnectivityInterceptor(
-            app: Application
+        app: Application
     ): NetworkConnectionInterceptor = NetworkConnectionInterceptor(app.applicationContext)
 
     @Provides
     @Singleton
     fun providesApplicationHeadersInterceptor(
-        cryptoSessionManager: SessionManager): ApplicationHeadersInterceptor = ApplicationHeadersInterceptor(cryptoSessionManager)
+        cryptoSessionManager: SessionManager
+    ): ApplicationHeadersInterceptor = ApplicationHeadersInterceptor(cryptoSessionManager)
 }

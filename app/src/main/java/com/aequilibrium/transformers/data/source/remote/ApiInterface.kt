@@ -9,12 +9,12 @@ import retrofit2.http.*
 
 interface ApiInterface {
 
-    //transformers
+    // allspark
     @GET("allspark")
     suspend fun getToken(): Response<ResponseBody>
-    //endregion
+    // endregion
 
-    //transformers
+    // transformers
     @GET("transformers")
     suspend fun getTransformers(): Response<TransformersResponse>
 
@@ -29,5 +29,5 @@ interface ApiInterface {
 
     @DELETE("transformers/{transformerId}")
     suspend fun deleteTransformer(@Path("transformerId") bookingId: String): Response<ResponseBody>
-    //endregion
+    // endregion
 }

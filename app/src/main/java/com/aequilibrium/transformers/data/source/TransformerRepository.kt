@@ -37,23 +37,24 @@ class TransformerRepository @Inject constructor(
         }
     }
 
-    override fun getTransformer(transformerId: String): LiveData<Resource<out Transformer?>> = liveData(ioDispatcher) {
+    override fun getTransformer(transformerId: String): LiveData<Resource<out Transformer?>> =
+        liveData(ioDispatcher) {
 
-        emit(Resource.Loading())
-        try {
-            val response = remoteDataSource.getTransformer(transformerId)
-            val transformer = response.body()
-            if (response.isSuccessful && transformer != null) {
-                emit(Resource.Success(transformer))
-            } else {
-                emit(Resource.Error(response?.message(), null))
+            emit(Resource.Loading())
+            try {
+                val response = remoteDataSource.getTransformer(transformerId)
+                val transformer = response.body()
+                if (response.isSuccessful && transformer != null) {
+                    emit(Resource.Success(transformer))
+                } else {
+                    emit(Resource.Error(response?.message(), null))
+                }
+            } catch (ex: NoConnectivityException) {
+                emit(Resource.Error(ex.message, null))
+            } catch (ex: Exception) {
+                emit(Resource.Error(null, null))
             }
-        } catch (ex: NoConnectivityException) {
-            emit(Resource.Error(ex.message, null))
-        } catch (ex: Exception) {
-            emit(Resource.Error(null, null))
         }
-    }
 
     override fun createTransformer(transformerRequest: TransformerRequest) =
         liveData(ioDispatcher) {

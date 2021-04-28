@@ -12,6 +12,7 @@
     <string name="error_dialog_message">Please try again later.</string>
     <string name="default_ok_text">Ok</string>
 
+    // Connection Error
     <string name="no_internet_title">No Internet</string>
     <string name="no_internet_message">There seems to be an issue with the network connection. Please make sure that Wi-Fi or mobile data is turned on and try again.</string>
 
@@ -46,6 +47,7 @@
     <string name="confirm_dialog_button_yes">YES</string>
 
     // Transformers Battle
+    <string name="battle_error_title">You need at least one Autobot and one Decepticon to start a battle</string>
     <string name="result_team_vs_team">%1$s %2$s\nVs\n%3$s %4$s</string>
     <string name="result_team_autobots">(Autobots) </string>
     <string name="result_team_decepticons">(Decepticons) </string>

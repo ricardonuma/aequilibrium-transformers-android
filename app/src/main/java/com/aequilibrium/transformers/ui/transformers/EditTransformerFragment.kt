@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aequilibrium.transformers.R
@@ -21,6 +20,8 @@ import com.aequilibrium.transformers.databinding.EditTransformerFragmentBinding
 import com.aequilibrium.transformers.databinding.TransformerStatsLayoutBinding
 import com.aequilibrium.transformers.ui.common.BaseFragment
 import com.aequilibrium.transformers.utils.Constants
+import com.aequilibrium.transformers.utils.Constants.TEAM_AUTOBOTS
+import com.aequilibrium.transformers.utils.Constants.TEAM_DECEPTICONS
 import com.google.android.material.slider.Slider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
@@ -41,8 +42,8 @@ class EditTransformerFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         loadTransformer(args.transformer)
 
@@ -55,6 +56,7 @@ class EditTransformerFragment : BaseFragment() {
         binding.decepticonsRadioButton.setOnClickListener {
             setupRadioButtonBackground(binding.decepticonsRadioButton, binding.autobotsRadioButton)
         }
+        enableSaveButton(validateChanges())
     }
 
     private fun setupName() {
@@ -62,7 +64,7 @@ class EditTransformerFragment : BaseFragment() {
     }
 
     private fun setupRadioGroupBackground() {
-        var radioGroupBgDrawable: Drawable? =
+        val radioGroupBgDrawable: Drawable? =
             ContextCompat.getDrawable(requireContext(), R.drawable.switch_light_grey)
         radioGroupBgDrawable?.alpha = 15
         binding.teamRadioGroup.background = radioGroupBgDrawable
@@ -94,7 +96,7 @@ class EditTransformerFragment : BaseFragment() {
 
     private fun loadTransformer(transformer: Transformer) {
         binding.nameEditText.setText(transformer.name)
-        if (args.transformer.team == "A") {
+        if (args.transformer.team == TEAM_AUTOBOTS) {
             setupRadioButtonBackground(binding.autobotsRadioButton, binding.decepticonsRadioButton)
         } else {
             setupRadioButtonBackground(binding.decepticonsRadioButton, binding.autobotsRadioButton)
@@ -104,7 +106,7 @@ class EditTransformerFragment : BaseFragment() {
 
         binding.updateButton.setOnClickListener {
             val accessToken = runBlocking { sessionManager.getToken() }
-            if (accessToken.isNullOrEmpty()) {
+            if (accessToken.isEmpty()) {
                 getToken { updateTransformer(transformer) }
             } else {
                 updateTransformer(transformer)
@@ -113,7 +115,7 @@ class EditTransformerFragment : BaseFragment() {
         binding.deleteButton.setOnClickListener {
             showConfirmDialog(R.string.transformer_delete_confirm_dialog_title) {
                 val accessToken = runBlocking { sessionManager.getToken() }
-                if (accessToken.isNullOrEmpty()) {
+                if (accessToken.isEmpty()) {
                     getToken { deleteTransformer(transformer.id) }
                 } else {
                     deleteTransformer(transformer.id)
@@ -162,11 +164,11 @@ class EditTransformerFragment : BaseFragment() {
         )
         layout.slider.value = statsValue.toFloat()
         layout.slider.addOnChangeListener { slider, _, _ ->
-            onValueChange(slider, layout.statsTextView, statsResource)
+            onStatsValueChange(slider, layout.statsTextView, statsResource)
         }
     }
 
-    private fun onValueChange(slider: Slider, valueTextView: TextView, statsResource: Int) {
+    private fun onStatsValueChange(slider: Slider, valueTextView: TextView, statsResource: Int) {
         valueTextView.apply {
             text = getString(
                 R.string.transformer_stats_values,
@@ -186,9 +188,9 @@ class EditTransformerFragment : BaseFragment() {
     private fun validateChanges(): Boolean =
         binding.nameEditText.text.toString() != args.transformer.name ||
                 if (binding.autobotsRadioButton.isChecked) {
-                    args.transformer.team != "A"
+                    args.transformer.team != TEAM_AUTOBOTS
                 } else {
-                    args.transformer.team != "D"
+                    args.transformer.team != TEAM_DECEPTICONS
                 }
                 ||
                 binding.strengthLayout.slider.value.toInt() != args.transformer.strength ||
@@ -218,7 +220,7 @@ class EditTransformerFragment : BaseFragment() {
         val transformerUpdated = TransformerRequest(
             transformer.id,
             binding.nameEditText.text.toString(),
-            if (binding.autobotsRadioButton.isChecked) "A" else "D",
+            if (binding.autobotsRadioButton.isChecked) TEAM_AUTOBOTS else TEAM_DECEPTICONS,
             binding.strengthLayout.slider.value.toInt(),
             binding.intelligenceLayout.slider.value.toInt(),
             binding.speedLayout.slider.value.toInt(),
@@ -248,21 +250,22 @@ class EditTransformerFragment : BaseFragment() {
     }
 
     private fun deleteTransformer(transformerId: String) {
-        editTransformerViewModel.deleteTransformer(transformerId).observe(viewLifecycleOwner) { it ->
-            when (it) {
-                is Resource.Loading -> showLoading()
-                is Resource.Error -> {
-                    hideLoading()
-                    if (it.message != null && it.message.contains(Constants.offlineExceptionError)) {
-                        showNoInternetDialog()
-                    } else {
-                        showErrorDialog()
+        editTransformerViewModel.deleteTransformer(transformerId)
+            .observe(viewLifecycleOwner) { it ->
+                when (it) {
+                    is Resource.Loading -> showLoading()
+                    is Resource.Error -> {
+                        hideLoading()
+                        if (it.message != null && it.message.contains(Constants.offlineExceptionError)) {
+                            showNoInternetDialog()
+                        } else {
+                            showErrorDialog()
+                        }
+                    }
+                    is Resource.Success -> {
+                        findNavController().navigate(EditTransformerFragmentDirections.actionEditTransformersFragmentToTransformersFragment())
                     }
                 }
-                is Resource.Success -> {
-                    findNavController().navigate(EditTransformerFragmentDirections.actionEditTransformersFragmentToTransformersFragment())
-                }
             }
-        }
     }
 }

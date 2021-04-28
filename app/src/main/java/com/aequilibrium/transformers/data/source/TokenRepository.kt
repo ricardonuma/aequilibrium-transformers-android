@@ -25,7 +25,7 @@ class TokenRepository @Inject constructor(
             if (response.isSuccessful && token != null) {
                 emit(Resource.Success(token.string()))
             } else {
-                emit(Resource.Error(response?.message(), null))
+                emit(Resource.Error(response.message(), null))
             }
         } catch (ex: NoConnectivityException) {
             emit(Resource.Error(ex.message, null))

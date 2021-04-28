@@ -20,8 +20,10 @@
         android:layout_marginTop="@dimen/card_view_margin_top_bottom"
         android:layout_marginEnd="@dimen/card_view_margin_start_end"
         android:layout_marginBottom="@dimen/card_view_margin_top_bottom"
+        android:clickable="true"
+        android:focusable="true"
         app:cardCornerRadius="10dp"
-        app:cardElevation="2dp">
+        app:cardElevation="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container"

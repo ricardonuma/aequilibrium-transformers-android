@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.aequilibrium.transformers.R
 import com.aequilibrium.transformers.data.model.Resource
@@ -19,6 +18,8 @@ import com.aequilibrium.transformers.databinding.NewTransformerFragmentBinding
 import com.aequilibrium.transformers.databinding.TransformerStatsLayoutBinding
 import com.aequilibrium.transformers.ui.common.BaseFragment
 import com.aequilibrium.transformers.utils.Constants
+import com.aequilibrium.transformers.utils.Constants.TEAM_AUTOBOTS
+import com.aequilibrium.transformers.utils.Constants.TEAM_DECEPTICONS
 import com.google.android.material.slider.Slider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
@@ -38,8 +39,8 @@ class NewTransformerFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupName()
 
@@ -56,7 +57,7 @@ class NewTransformerFragment : BaseFragment() {
 
         binding.createButton.setOnClickListener {
             val accessToken = runBlocking { sessionManager.getToken() }
-            if (accessToken.isNullOrEmpty()) {
+            if (accessToken.isEmpty()) {
                 getToken { createTransformer() }
             } else {
                 createTransformer()
@@ -69,7 +70,7 @@ class NewTransformerFragment : BaseFragment() {
     }
 
     private fun setupRadioGroupBackground() {
-        var radioGroupBgDrawable: Drawable? =
+        val radioGroupBgDrawable: Drawable? =
             ContextCompat.getDrawable(requireContext(), R.drawable.switch_light_grey)
         radioGroupBgDrawable?.alpha = 15
         binding.teamRadioGroup.background = radioGroupBgDrawable
@@ -167,7 +168,7 @@ class NewTransformerFragment : BaseFragment() {
         val newTransformer = TransformerRequest(
             "",
             binding.nameEditText.text.toString(),
-            if (binding.autobotsRadioButton.isChecked) "A" else "D",
+            if (binding.autobotsRadioButton.isChecked) TEAM_AUTOBOTS else TEAM_DECEPTICONS,
             binding.strengthLayout.slider.value.toInt(),
             binding.intelligenceLayout.slider.value.toInt(),
             binding.speedLayout.slider.value.toInt(),
@@ -177,21 +178,22 @@ class NewTransformerFragment : BaseFragment() {
             binding.firepowerLayout.slider.value.toInt(),
             binding.skillLayout.slider.value.toInt()
         )
-        newTransformerViewModel.createTransformer(newTransformer).observe(viewLifecycleOwner) { it ->
-            when (it) {
-                is Resource.Loading -> showLoading()
-                is Resource.Error -> {
-                    hideLoading()
-                    if (it.message != null && it.message.contains(Constants.offlineExceptionError)) {
-                        showNoInternetDialog()
-                    } else {
-                        showErrorDialog()
+        newTransformerViewModel.createTransformer(newTransformer)
+            .observe(viewLifecycleOwner) { it ->
+                when (it) {
+                    is Resource.Loading -> showLoading()
+                    is Resource.Error -> {
+                        hideLoading()
+                        if (it.message != null && it.message.contains(Constants.offlineExceptionError)) {
+                            showNoInternetDialog()
+                        } else {
+                            showErrorDialog()
+                        }
+                    }
+                    is Resource.Success -> {
+                        findNavController().navigate(NewTransformerFragmentDirections.actionNewTransformersFragmentToTransformersFragment())
                     }
                 }
-                is Resource.Success -> {
-                    findNavController().navigate(NewTransformerFragmentDirections.actionNewTransformersFragmentToTransformersFragment())
-                }
             }
-        }
     }
 }

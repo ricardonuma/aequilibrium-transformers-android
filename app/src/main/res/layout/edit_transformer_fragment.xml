@@ -8,14 +8,14 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/layout_padding"
         android:orientation="vertical"
+        android:padding="@dimen/layout_padding"
         tools:context=".ui.transformers.EditTransformerFragment">
 
         <TextView
             android:id="@+id/nameTextView"
-            android:text="@string/transformer_name_title"
-            style="@style/TitleTextViewStyle" />
+            style="@style/TitleTextViewStyle"
+            android:text="@string/transformer_name_title" />
 
         <EditText
             android:id="@+id/nameEditText"
@@ -24,9 +24,9 @@
 
         <TextView
             android:id="@+id/teamTextView"
+            style="@style/TitleTextViewStyle"
             android:layout_marginTop="@dimen/radio_group_title_margin_top"
-            android:text="@string/transformer_team_title"
-            style="@style/TitleTextViewStyle" />
+            android:text="@string/transformer_team_title" />
 
         <RadioGroup
             android:id="@+id/teamRadioGroup"
@@ -36,28 +36,21 @@
             android:layout_marginTop="@dimen/transformer_title_margin"
             android:layout_marginEnd="@dimen/transformer_title_margin"
             android:layout_marginBottom="@dimen/transformer_radio_group_margin_bottom"
-            android:background="@drawable/switch_light_grey"
-            android:orientation="horizontal">
+            android:theme="@style/RadioGroupStyle">
 
             <RadioButton
                 android:id="@+id/autobotsRadioButton"
                 style="@style/RadioButtonStyle"
                 android:layout_marginLeft="2dp"
-                android:background="@color/colorLightGray"
                 android:text="@string/transformer_team_autobots"
-                android:textAllCaps="true"
-                android:textColor="@color/colorRed"
-                android:textStyle="bold" />
+                android:textColor="@color/colorRed" />
 
             <RadioButton
                 android:id="@+id/decepticonsRadioButton"
                 style="@style/RadioButtonStyle"
                 android:layout_marginRight="2dp"
-                android:background="@color/colorLightGray"
                 android:text="@string/transformer_team_decepticons"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPurple"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPurple" />
         </RadioGroup>
 
         <include

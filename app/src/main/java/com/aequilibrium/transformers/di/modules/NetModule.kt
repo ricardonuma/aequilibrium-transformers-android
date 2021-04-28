@@ -24,7 +24,6 @@ class NetModule {
     @Provides
     @Singleton
     fun providesOkHttpClient(
-//        tokenAuthenticator: TokenAuthenticator,
         applicationHeadersInterceptor: ApplicationHeadersInterceptor,
         networkConnectionInterceptor: NetworkConnectionInterceptor
     ): OkHttpClient {
@@ -34,7 +33,6 @@ class NetModule {
         return OkHttpClient.Builder()
             .readTimeout(Constants.API_TIMEOUT, TimeUnit.SECONDS)
             .connectTimeout(Constants.API_TIMEOUT, TimeUnit.SECONDS)
-//            .authenticator(tokenAuthenticator)
             .addInterceptor(applicationHeadersInterceptor)
             .addInterceptor(networkConnectionInterceptor)
             .addInterceptor(loggingInterceptor)

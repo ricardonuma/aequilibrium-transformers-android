@@ -8,7 +8,7 @@ import okhttp3.Response
 import java.io.IOException
 
 class NetworkConnectionInterceptor(
-        private val context: Context
+    private val context: Context
 ) : Interceptor {
 
     @RequiresApi(Build.VERSION_CODES.M)

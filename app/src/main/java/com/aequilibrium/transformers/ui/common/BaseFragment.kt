@@ -5,7 +5,6 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
 import com.aequilibrium.transformers.R
 import com.aequilibrium.transformers.auth.SessionManager
 import com.aequilibrium.transformers.data.model.Resource
@@ -19,7 +18,7 @@ abstract class BaseFragment : Fragment() {
     @Inject
     lateinit var sessionManager: SessionManager
 
-    val sharedViewModel: SharedViewModel by activityViewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private var activity: MainActivity? = null
 
     override fun onAttach(context: Context) {
@@ -45,6 +44,17 @@ abstract class BaseFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(titleId))
             .setMessage(getString(messageId))
+            .setPositiveButton(getString(R.string.default_ok_text)) { dialog, _ ->
+                dialog.cancel()
+            }
+            .show()
+    }
+
+    fun showErrorDialog(
+        @StringRes titleId: Int = R.string.error_dialog_title
+    ) {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(titleId))
             .setPositiveButton(getString(R.string.default_ok_text)) { dialog, _ ->
                 dialog.cancel()
             }

@@ -9,9 +9,12 @@ import com.aequilibrium.transformers.R
 import com.aequilibrium.transformers.data.model.Transformer
 import com.aequilibrium.transformers.databinding.TransformersBattleFragmentBinding
 import com.aequilibrium.transformers.ui.common.BaseFragment
+import com.aequilibrium.transformers.utils.Constants.COURAGE_DIFFERENCE
 import com.aequilibrium.transformers.utils.Constants.DRAW
 import com.aequilibrium.transformers.utils.Constants.OPTIMUS_PRIME
 import com.aequilibrium.transformers.utils.Constants.PREDAKING
+import com.aequilibrium.transformers.utils.Constants.SKILL_DIFFERENCE
+import com.aequilibrium.transformers.utils.Constants.STRENGTH_DIFFERENCE
 import com.aequilibrium.transformers.utils.Constants.TEAM_AUTOBOTS
 import com.aequilibrium.transformers.utils.Constants.TEAM_DECEPTICONS
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,9 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class TransformersBattleFragment : BaseFragment() {
 
     private lateinit var binding: TransformersBattleFragmentBinding
-
     private val args: TransformersBattleFragmentArgs by navArgs()
-
     private var battleResult: StringBuilder = StringBuilder()
 
     override fun onCreateView(
@@ -33,15 +34,15 @@ class TransformersBattleFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         battle(args.transformers)
     }
 
     private fun battle(transformers: Array<Transformer>) {
-        var autobots: ArrayList<Transformer> = ArrayList()
-        var decepticons: ArrayList<Transformer> = ArrayList()
+        val autobots: ArrayList<Transformer> = ArrayList()
+        val decepticons: ArrayList<Transformer> = ArrayList()
         var winningTeam: String = TEAM_AUTOBOTS
 
         for (transformer in transformers) {
@@ -71,7 +72,7 @@ class TransformersBattleFragment : BaseFragment() {
                     decepticons[decepticonsIndex]
                 )
             ) {
-                // autobot won automatically
+                // autobot wins automatically
                 battleOutput(
                     autobots,
                     decepticons,
@@ -85,7 +86,7 @@ class TransformersBattleFragment : BaseFragment() {
                     decepticons[decepticonsIndex]
                 )
             ) {
-                // decepticon won automatically
+                // decepticon wins automatically
                 battleOutput(
                     decepticons,
                     autobots,
@@ -99,7 +100,7 @@ class TransformersBattleFragment : BaseFragment() {
                     decepticons[decepticonsIndex]
                 )
             ) {
-                // both TEAMS were destroyed
+                // both teams are destroyed
                 battleResult.appendLine(getString(R.string.result_both_teams_destroyed))
                     .appendLine()
                 autobots.clear()
@@ -107,16 +108,18 @@ class TransformersBattleFragment : BaseFragment() {
                 winningTeam = DRAW
             } else {
                 when {
-                    autobots[autobotsIndex].courage <= 4 && autobots[autobotsIndex].strength + 3 <= decepticons[decepticonsIndex].strength -> {
-                        // autobot ran away
+                    autobots[autobotsIndex].courage <= COURAGE_DIFFERENCE &&
+                            autobots[autobotsIndex].strength + STRENGTH_DIFFERENCE <= decepticons[decepticonsIndex].strength -> {
+                        // autobot run away
                         battleOutput(
                             autobots, decepticons, autobotsIndex, decepticonsIndex, RAN_AWAY
                         )
                         autobotsIndex--
                         winningTeam = decepticons[decepticonsIndex].team
                     }
-                    decepticons[decepticonsIndex].courage <= 4 && decepticons[decepticonsIndex].strength + 3 <= autobots[autobotsIndex].strength -> {
-                        // decepticon ran away
+                    decepticons[decepticonsIndex].courage <= COURAGE_DIFFERENCE &&
+                            decepticons[decepticonsIndex].strength + STRENGTH_DIFFERENCE <= autobots[autobotsIndex].strength -> {
+                        // decepticon run away
                         battleOutput(
                             decepticons, autobots, decepticonsIndex, autobotsIndex, RAN_AWAY
                         )
@@ -125,16 +128,16 @@ class TransformersBattleFragment : BaseFragment() {
                     }
                     else -> {
                         when {
-                            autobots[autobotsIndex].skill >= decepticons[decepticonsIndex].skill + 3 -> {
-                                // autobot won by skill
+                            autobots[autobotsIndex].skill >= decepticons[decepticonsIndex].skill + SKILL_DIFFERENCE -> {
+                                // autobot wins by skill
                                 battleOutput(
                                     autobots, decepticons, autobotsIndex, decepticonsIndex, SKILL
                                 )
                                 decepticonsIndex--
                                 winningTeam = autobots[autobotsIndex].team
                             }
-                            autobots[autobotsIndex].skill + 3 <= decepticons[decepticonsIndex].skill -> {
-                                // decepticon won by skill
+                            autobots[autobotsIndex].skill + SKILL_DIFFERENCE <= decepticons[decepticonsIndex].skill -> {
+                                // decepticon wins by skill
                                 battleOutput(
                                     decepticons, autobots, decepticonsIndex, autobotsIndex, SKILL
                                 )
@@ -144,7 +147,7 @@ class TransformersBattleFragment : BaseFragment() {
                             else -> {
                                 when {
                                     autobots[autobotsIndex].overallRating() > decepticons[decepticonsIndex].overallRating() -> {
-                                        // autobot won by overall rating
+                                        // autobot wins by overall rating
                                         battleOutput(
                                             autobots, decepticons, autobotsIndex,
                                             decepticonsIndex, OVERALL_RATING
@@ -153,7 +156,7 @@ class TransformersBattleFragment : BaseFragment() {
                                         winningTeam = autobots[autobotsIndex].team
                                     }
                                     autobots[autobotsIndex].overallRating() < decepticons[decepticonsIndex].overallRating() -> {
-                                        // decepticon won by overall rating
+                                        // decepticon wins by overall rating
                                         battleOutput(
                                             decepticons, autobots, decepticonsIndex,
                                             autobotsIndex, OVERALL_RATING
@@ -162,7 +165,7 @@ class TransformersBattleFragment : BaseFragment() {
                                         winningTeam = decepticons[decepticonsIndex].team
                                     }
                                     else -> {
-                                        // both were destroyed
+                                        // both autobot and decepticon are destroyed
                                         battleResult.appendLine(getString(R.string.result_both_destroyed))
                                             .appendLine()
                                         autobots.remove(autobots[autobotsIndex])
@@ -179,7 +182,7 @@ class TransformersBattleFragment : BaseFragment() {
             }
         }
 
-        var winningTeamMessage: StringBuilder = StringBuilder()
+        val winningTeamMessage: StringBuilder = StringBuilder()
         if (winningTeam == TEAM_AUTOBOTS || winningTeam == TEAM_DECEPTICONS) {
             winningTeamMessage.appendLine(
                 getString(
@@ -187,7 +190,7 @@ class TransformersBattleFragment : BaseFragment() {
                     getTeam(winningTeam)
                 )
             )
-            var loosingTeamMessage: StringBuilder = StringBuilder()
+            val loosingTeamMessage: StringBuilder = StringBuilder()
             loosingTeamMessage.appendLine(
                 getString(
                     R.string.result_loosing_team_message, if (winningTeam == TEAM_AUTOBOTS) {
@@ -222,15 +225,16 @@ class TransformersBattleFragment : BaseFragment() {
     }
 
     private fun isOptimusPrimeOrPredaking(transformer: Transformer): Boolean {
-        return transformer.name == OPTIMUS_PRIME || transformer.name == PREDAKING
+        return transformer.name.equals(OPTIMUS_PRIME, ignoreCase = true) ||
+                transformer.name.equals(PREDAKING, ignoreCase = true)
     }
 
     private fun battleOutput(
         winningList: ArrayList<Transformer>, losingList: ArrayList<Transformer>,
         winningIndex: Int, losingIndex: Int, reason: String
     ) {
-        when {
-            reason == OVERALL_RATING -> {
+        when (reason) {
+            OVERALL_RATING -> {
                 battleResult.appendLine(
                     getString(
                         R.string.result_team_name_reason,
@@ -242,7 +246,7 @@ class TransformersBattleFragment : BaseFragment() {
                     .appendLine()
                 losingList.remove(losingList[losingIndex])
             }
-            reason == SKILL -> {
+            SKILL -> {
                 battleResult.appendLine(
                     getString(
                         R.string.result_team_name_reason,
@@ -254,7 +258,7 @@ class TransformersBattleFragment : BaseFragment() {
                     .appendLine()
                 losingList.remove(losingList[losingIndex])
             }
-            reason == RAN_AWAY -> {
+            RAN_AWAY -> {
                 battleResult.appendLine(
                     getString(
                         R.string.result_team_name_reason_ran_away,
