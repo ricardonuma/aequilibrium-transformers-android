@@ -1,6 +1,6 @@
 # aequilibrium-transformers-android
 
-Introduction
+## Introduction
 
 Scope of the technical assessment
 This technical assessment is the first version of Transformers for Aequilibrium. High level functionalities include token retrieval, create/view/edit/delete transformers and simulate a battle between them.
@@ -9,28 +9,28 @@ This technical assessment is the first version of Transformers for Aequilibrium.
 Technologies
 
 
-Development tools
+## Development tools
 Android Studio
 Postman
 
 
-Language
+## Language
 
 Kotlin
 
 
-Software
+## Software
 
 Support from Android 4.4+ (API version 19)
 
 
-Hardware
+## Hardware
 
 Android phones running Android 4.4+
 
 
 
-Feature Overview
+## Feature Overview
 
 The following features have been introduced in this technical assessment:
 
@@ -69,7 +69,8 @@ In addition, other common Android patterns and frameworks such as Coroutines, Re
 
 
 
-API
+
+## API
 
 APIs which are used to support the functionalities:
 
