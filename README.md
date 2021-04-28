@@ -95,9 +95,7 @@ be valid
 
 
 Unit tests
-
 Unit tests have been added to the following view models
-
 •	Transformers View Model
 
 •	New Transformer View Model
