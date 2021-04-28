@@ -6,7 +6,7 @@ Scope of the technical assessment
 This technical assessment is the first version of Transformers for Aequilibrium. High level functionalities include token retrieval, create/view/edit/delete transformers and simulate a battle between them.
 
 
-## Technologies
+### Technologies
 
 
 ## Development tools
@@ -36,27 +36,27 @@ The following features have been introduced in this technical assessment:
 
 o	Token:
 
-•	Get token for other APIs access
+ - Get token for other APIs access
 
 o	Transformers:
 
-•	Create transformer
+ - Create transformer
 
-•	View transformer list
+ - View transformer list
 
-•	Pull to refresh on transformers list
+ - Pull to refresh on transformers list
 
-•	View transformer
+ - View transformer
 
-•	Edit transformer by sending a JSON request
+ - Edit transformer by sending a JSON request
 
-•	Delete transformer by its id
+ - Delete transformer by its id
 
-•	APIs error handling
+ - APIs error handling
 
-•	Connection error handling
+ - Connection error handling
 
-•	Simulate a battle between transformers
+ - Simulate a battle between transformers
 
 
 
