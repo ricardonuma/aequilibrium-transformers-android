@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="transformerRowItem"
+            type="com.aequilibrium.transformers.ui.transformers.TransformerRowItem" />
+
+        <import type="android.view.View" />
+
+        <import type="androidx.core.content.ContextCompat" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:layout_marginStart="@dimen/card_view_margin_start_end"
+        android:layout_marginTop="@dimen/card_view_margin_top_bottom"
+        android:layout_marginEnd="@dimen/card_view_margin_start_end"
+        android:layout_marginBottom="@dimen/card_view_margin_top_bottom"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/teamIconImageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="@dimen/row_item_icon_margin"
+                android:layout_marginBottom="@dimen/row_item_icon_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/row_item_name_margin"
+                android:layout_marginTop="@dimen/row_item_name_margin"
+                android:ellipsize="end"
+                android:maxWidth="264dp"
+                android:maxLines="1"
+                android:text="@{transformerRowItem.name}"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="name" />
+
+            <TextView
+                android:id="@+id/overallRatingTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.overallRating}"
+                app:layout_constraintStart_toEndOf="@+id/teamIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                tools:text="@string/transformer_strength" />
+
+            <TextView
+                android:id="@+id/strengthTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.strength}"
+                app:layout_constraintStart_toEndOf="@+id/teamIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/overallRatingTextView"
+                tools:text="@string/transformer_strength" />
+
+            <TextView
+                android:id="@+id/intelligenceTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.intelligence}"
+                app:layout_constraintStart_toEndOf="@+id/teamIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/strengthTextView"
+                tools:text="@string/transformer_intelligence" />
+
+            <TextView
+                android:id="@+id/speedTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.speed}"
+                app:layout_constraintStart_toEndOf="@+id/teamIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/intelligenceTextView"
+                tools:text="@string/transformer_speed" />
+
+            <TextView
+                android:id="@+id/enduranceTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.endurance}"
+                app:layout_constraintStart_toEndOf="@+id/teamIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/speedTextView"
+                tools:text="@string/transformer_endurance" />
+
+            <TextView
+                android:id="@+id/rankTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.rank}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/strengthTextView"
+                app:layout_constraintTop_toBottomOf="@+id/overallRatingTextView"
+                tools:text="@string/transformer_rank" />
+
+            <TextView
+                android:id="@+id/courageTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.courage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/intelligenceTextView"
+                app:layout_constraintTop_toBottomOf="@+id/rankTextView"
+                tools:text="@string/transformer_courage" />
+
+            <TextView
+                android:id="@+id/firepowerTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.firepower}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/speedTextView"
+                app:layout_constraintTop_toBottomOf="@+id/courageTextView"
+                tools:text="@string/transformer_firepower" />
+
+            <TextView
+                android:id="@+id/skillTextView"
+                style="@style/TextViewStyle"
+                android:text="@{transformerRowItem.skill}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/enduranceTextView"
+                app:layout_constraintTop_toBottomOf="@+id/firepowerTextView"
+                tools:text="@string/transformer_skill" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

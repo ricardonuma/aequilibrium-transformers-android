@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/layout_padding"
+        android:orientation="vertical"
+        tools:context=".ui.transformers.EditTransformerFragment">
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:text="@string/transformer_name_title"
+            style="@style/TitleTextViewStyle" />
+
+        <EditText
+            android:id="@+id/nameEditText"
+            style="@style/EditTextStyle"
+            android:elevation="2dp" />
+
+        <TextView
+            android:id="@+id/teamTextView"
+            style="@style/TitleTextViewStyle"
+            android:layout_marginTop="@dimen/radio_group_title_margin_top"
+            android:text="@string/transformer_team_title" />
+
+        <RadioGroup
+            android:id="@+id/teamRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/radio_group_height"
+            android:layout_marginStart="@dimen/transformer_title_margin"
+            android:layout_marginTop="@dimen/transformer_title_margin"
+            android:layout_marginEnd="@dimen/transformer_title_margin"
+            android:layout_marginBottom="@dimen/transformer_radio_group_margin_bottom"
+            android:background="@drawable/switch_light_grey"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/autobotsRadioButton"
+                style="@style/RadioButtonStyle"
+                android:layout_marginLeft="2dp"
+                android:background="@color/colorLightGray"
+                android:text="@string/transformer_team_autobots"
+                android:textAllCaps="true"
+                android:textColor="@color/colorRed"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/decepticonsRadioButton"
+                style="@style/RadioButtonStyle"
+                android:layout_marginRight="2dp"
+                android:background="@color/colorLightGray"
+                android:text="@string/transformer_team_decepticons"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPurple"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+        <include
+            android:id="@+id/strengthLayout"
+            layout="@layout/transformer_stats_layout" />
+
+        <include
+            android:id="@+id/intelligenceLayout"
+            layout="@layout/transformer_stats_layout" />
+
+        <include
+            android:id="@+id/speedLayout"
+            layout="@layout/transformer_stats_layout" />
+
+        <include
+            android:id="@+id/enduranceLayout"
+            layout="@layout/transformer_stats_layout" />
+
+        <include
+            android:id="@+id/rankLayout"
+            layout="@layout/transformer_stats_layout" />
+
+        <include
+            android:id="@+id/courageLayout"
+            layout="@layout/transformer_stats_layout" />
+
+        <include
+            android:id="@+id/firepowerLayout"
+            layout="@layout/transformer_stats_layout" />
+
+        <include
+            android:id="@+id/skillLayout"
+            layout="@layout/transformer_stats_layout" />
+
+        <Button
+            android:id="@+id/createButton"
+            style="@style/ButtonStyle"
+            android:layout_margin="@dimen/button_margin"
+            android:backgroundTint="@color/colorPrimary"
+            android:enabled="false"
+            android:text="@string/transformer_create_button" />
+
+    </LinearLayout>
+
+</ScrollView>

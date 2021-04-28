@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/transformersFragment">
+
+    <fragment
+        android:id="@+id/transformersFragment"
+        android:name="com.aequilibrium.transformers.ui.transformers.TransformersFragment"
+        android:label="@string/transformers_title"
+        tools:layout="@layout/transformers_fragment">
+        <action
+            android:id="@+id/action_transformersFragment_to_newTransformerFragment"
+            app:destination="@id/newTransformerFragment" />
+        <action
+            android:id="@+id/action_transformersFragment_to_editTransformerFragment"
+            app:destination="@id/editTransformerFragment" />
+        <action
+            android:id="@+id/action_transformersFragment_to_TransformersBattleFragment"
+            app:destination="@id/TransformersBattleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTransformerFragment"
+        android:name="com.aequilibrium.transformers.ui.transformers.EditTransformerFragment"
+        android:label="@string/edit_transformer_title"
+        tools:layout="@layout/edit_transformer_fragment">
+        <argument
+            android:name="transformer"
+            app:argType="com.aequilibrium.transformers.data.model.Transformer" />
+        <action
+            android:id="@+id/action_editTransformersFragment_to_TransformersFragment"
+            app:destination="@id/transformersFragment"
+            app:popUpTo="@id/editTransformerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/newTransformerFragment"
+        android:name="com.aequilibrium.transformers.ui.transformers.NewTransformerFragment"
+        android:label="@string/new_transformer_title"
+        tools:layout="@layout/new_transformer_fragment">
+        <action
+            android:id="@+id/action_newTransformersFragment_to_TransformersFragment"
+            app:destination="@id/transformersFragment"
+            app:popUpTo="@id/newTransformerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/TransformersBattleFragment"
+        android:name="com.aequilibrium.transformers.ui.transformers.TransformersBattleFragment"
+        android:label="@string/transformers_battle_title"
+        tools:layout="@layout/transformers_battle_fragment">
+        <argument
+            android:name="transformers"
+            app:argType="com.aequilibrium.transformers.data.model.Transformer[]" />
+    </fragment>
+</navigation>
